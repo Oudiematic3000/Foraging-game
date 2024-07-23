@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
   m_Name: Mushroom
   m_EditorClassIdentifier: 
-  ingredientName: 
-  flavours: []
-  ingredientType: 
-  ingredientDescription: 
+  ingredientName: Mushroom
+  flavours:
+  - Umami
+  - Sweet
+  ingredientType: Fungus
+  ingredientDescription: Sweet fuckers
