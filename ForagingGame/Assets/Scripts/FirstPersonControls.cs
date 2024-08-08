@@ -34,6 +34,14 @@ public class FirstPersonControls : MonoBehaviour
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingGun = false;
 
+    [Header("CROUCH SETTINGS")]
+    [Space(5)]
+    public float crouchHeight = 1;
+    public float standHeight = 2;
+    public float crouchSpeed = 1.5f;
+    public bool isCrouching = false;
+
+
 
     private void Awake()
     {
@@ -66,6 +74,9 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
 
+        // Subscribe to the crouch input event
+        playerInput.Player.Crouch.performed += ctx => Crouch(); // Call the PickUpObject method when pick-up input is performed
+
 
     }
 
@@ -79,6 +90,15 @@ public class FirstPersonControls : MonoBehaviour
 
     public void Move()
     {
+        float currentSpeed;
+        if (isCrouching)
+        {
+            currentSpeed = crouchSpeed;
+        }
+        else
+        {
+            currentSpeed = moveSpeed;
+        }
         // Create a movement vector based on the input
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
 
@@ -86,7 +106,9 @@ public class FirstPersonControls : MonoBehaviour
         move = transform.TransformDirection(move);
 
         // Move the character controller based on the movement vector and speed
-        characterController.Move(move * moveSpeed * Time.deltaTime);
+        characterController.Move(move * currentSpeed * Time.deltaTime);
+
+        
     }
 
     public void LookAround()
@@ -187,6 +209,20 @@ public class FirstPersonControls : MonoBehaviour
 
                 holdingGun = true;
             }
+        }
+    }
+
+    public void Crouch()
+    {
+        if (isCrouching)
+        {
+            characterController.height=standHeight;
+            isCrouching = false;
+        }
+        else
+        {
+            characterController.height = crouchHeight;
+            isCrouching = true;
         }
     }
 
