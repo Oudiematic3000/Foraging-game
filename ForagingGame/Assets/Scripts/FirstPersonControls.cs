@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FirstPersonControls : MonoBehaviour
 {
+   
 
     [Header("MOVEMENT SETTINGS")]
     [Space(5)]
@@ -30,7 +32,8 @@ public class FirstPersonControls : MonoBehaviour
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
-    private GameObject heldObject; // Reference to the currently held object
+    private Ingredient.Tool heldTool=Ingredient.Tool.None; // Reference to the currently held object
+    private float scrollInput;
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingGun = false;
 
@@ -41,12 +44,18 @@ public class FirstPersonControls : MonoBehaviour
     public float crouchSpeed = 1.5f;
     public bool isCrouching = false;
 
+    [Header("UI SETTINGS")]
+    [Space(5)]
+    public TextMeshProUGUI toolUI;
+    
+
 
 
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
+      
     }
 
     private void OnEnable()
@@ -73,6 +82,10 @@ public class FirstPersonControls : MonoBehaviour
 
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
+
+        // Subscribe to the SwitchTool input events
+        playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
+        playerInput.Player.SwitchTool.performed += ctx => SwitchTool();
 
         // Subscribe to the crouch input event
         playerInput.Player.Crouch.performed += ctx => Crouch(); // Call the PickUpObject method when pick-up input is performed
@@ -167,13 +180,13 @@ public class FirstPersonControls : MonoBehaviour
     public void PickUpObject()
     {
         // Check if we are already holding an object
-        if (heldObject != null)
+       /* if (heldTool != null)
         {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
+            heldTool.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldTool.transform.parent = null;
             holdingGun = false;
         }
-
+       */
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
@@ -185,31 +198,38 @@ public class FirstPersonControls : MonoBehaviour
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.CompareTag("PickUp"))
+            if (hit.collider.GetComponent<PickUp>()!=null)
             {
-                // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+                Ingredient hitIngredient=hit.collider.GetComponent<PickUp>().ingredient;
+            
+                if (hitIngredient.toolNeeded==heldTool) {
 
-                // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
-                heldObject.transform.parent = holdPosition;
+                    //TODO: take hitIngredient template and create a new invItem with the same template in inventory
+                    Destroy(hit.collider.gameObject);
+                }
+
+               
             }
             else if (hit.collider.CompareTag("Gun"))
             {
-                // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
-
-                // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
-                heldObject.transform.parent = holdPosition;
-
-                holdingGun = true;
+                
             }
         }
+    }
+
+    public void SwitchTool()
+    {
+        
+        heldTool += (int)scrollInput;
+        if (heldTool < 0)
+        {
+            heldTool= 0;
+        }
+        else if ((int)heldTool > 1)
+        {
+            heldTool = Ingredient.Tool.Drill;
+        }
+        toolUI.text = heldTool.ToString();
     }
 
     public void Crouch()
@@ -226,5 +246,26 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
+    // Pick up the object         --Leaving this old code here in case we find a use for it
+    /*  heldTool = hit.collider.gameObject;
+      heldTool.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+
+      // Attach the object to the hold position
+      heldTool.transform.position = holdPosition.position;
+      heldTool.transform.rotation = holdPosition.rotation;
+      heldTool.transform.parent = holdPosition;
+    */
+
+    // Pick up the object
+    /*  heldTool = hit.collider.gameObject;
+      heldTool.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+
+      // Attach the object to the hold position
+      heldTool.transform.position = holdPosition.position;
+      heldTool.transform.rotation = holdPosition.rotation;
+      heldTool.transform.parent = holdPosition;
+
+      holdingGun = true;
+    */
 
 }

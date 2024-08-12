@@ -5,9 +5,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="ingredient", menuName ="ingredient")]
 public class Ingredient : ScriptableObject
 {
+
     public string ingredientName;
     public string[] flavours;
-    public string ingredientType;
+    public Type ingredientType;
     public string ingredientDescription;
+    public Tool toolNeeded;
+    public Mesh mesh;
 
+    public enum Tool
+    {
+        None,
+        Drill
+    }
+
+    public enum Type
+    {
+        Protein,
+        Seasoning,
+        Produce,
+        Starch,
+        Fat
+    }
 }

@@ -80,6 +80,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTool"",
+                    ""type"": ""Value"",
+                    ""id"": ""09926fe4-2e82-43fe-9594-da4181d889ba"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -313,6 +322,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb9dc044-408d-4e72-b5b9-db9159d30b29"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=-0.008333334)"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwitchTool"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""145cad70-36c8-431a-b7fd-e56108ba1eff"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0.008333334)"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwitchTool"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -350,6 +381,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_SwitchTool = m_Player.FindAction("SwitchTool", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -417,6 +449,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_SwitchTool;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -427,6 +460,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @SwitchTool => m_Wrapper.m_Player_SwitchTool;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +488,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @SwitchTool.started += instance.OnSwitchTool;
+            @SwitchTool.performed += instance.OnSwitchTool;
+            @SwitchTool.canceled += instance.OnSwitchTool;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -476,6 +513,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @SwitchTool.started -= instance.OnSwitchTool;
+            @SwitchTool.performed -= instance.OnSwitchTool;
+            @SwitchTool.canceled -= instance.OnSwitchTool;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -519,5 +559,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnSwitchTool(InputAction.CallbackContext context);
     }
 }

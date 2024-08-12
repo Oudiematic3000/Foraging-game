@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchTool",
+                    "type": "Value",
+                    "id": "09926fe4-2e82-43fe-9594-da4181d889ba",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -289,6 +298,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb9dc044-408d-4e72-b5b9-db9159d30b29",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "Scale(factor=-0.008333334)",
+                    "groups": "Keyboard",
+                    "action": "SwitchTool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "145cad70-36c8-431a-b7fd-e56108ba1eff",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.008333334)",
+                    "groups": "Keyboard",
+                    "action": "SwitchTool",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

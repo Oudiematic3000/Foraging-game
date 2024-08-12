@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: Mushroom
+  m_Name: VegetableOil
   m_EditorClassIdentifier: 
-  ingredientName: Mushroom
+  ingredientName: Vegetable Oil
   flavours:
-  - Umami
-  - Sweet
-  ingredientType: 2
-  ingredientDescription: Earthy and sweet when cooked.
-  toolNeeded: 0
+  - Neutral
+  ingredientType: Fat
+  ingredientDescription: Drilled up from large deposits of compacted vegetables deep
+    underground.
+  toolNeeded: 1
