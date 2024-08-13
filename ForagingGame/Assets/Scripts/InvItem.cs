@@ -5,6 +5,10 @@ using UnityEngine;
 public class InvItem : MonoBehaviour
 {
     public Ingredient ingredient;
+
+    public int quantity;
+
+
     void Start()
     {
         
@@ -14,5 +18,12 @@ public class InvItem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetUp(Ingredient item) 
+    {
+        this.ingredient = item;
+        
+
     }
 }

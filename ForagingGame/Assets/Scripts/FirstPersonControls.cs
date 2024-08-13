@@ -36,6 +36,7 @@ public class FirstPersonControls : MonoBehaviour
     private float scrollInput;
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingGun = false;
+    public InventoryManager inventory;
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -205,7 +206,9 @@ public class FirstPersonControls : MonoBehaviour
                 if (hitIngredient.toolNeeded==heldTool) {
 
                     //TODO: take hitIngredient template and create a new invItem with the same template in inventory
+                    inventory.AddInventory(hitIngredient);
                     Destroy(hit.collider.gameObject);
+
                 }
 
                
@@ -245,6 +248,8 @@ public class FirstPersonControls : MonoBehaviour
             isCrouching = true;
         }
     }
+
+    
 
     // Pick up the object         --Leaving this old code here in case we find a use for it
     /*  heldTool = hit.collider.gameObject;
