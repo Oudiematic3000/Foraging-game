@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -48,6 +50,8 @@ public class FirstPersonControls : MonoBehaviour
     [Header("UI SETTINGS")]
     [Space(5)]
     public TextMeshProUGUI toolUI;
+    public GameObject inventoryUI;
+
     
 
 
@@ -84,8 +88,12 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
 
-        // Subscribe to the SwitchTool input events
-        playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
+        //Subscribe to the pick-up input event
+        playerInput.Player.ToggleInventory.performed += ctx => ToggleInventory(); // Call the PickUpObject method when pick-up input is performed
+
+
+    // Subscribe to the SwitchTool input events
+    playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
         playerInput.Player.SwitchTool.performed += ctx => SwitchTool();
 
         // Subscribe to the crouch input event
@@ -246,6 +254,17 @@ public class FirstPersonControls : MonoBehaviour
         {
             characterController.height = crouchHeight;
             isCrouching = true;
+        }
+    }
+
+    public void ToggleInventory()
+    {
+        if(inventoryUI.transform.localScale == Vector3.one)
+        {
+            inventoryUI.transform.localScale = Vector3.zero;
+        }
+        else if(inventoryUI.transform.localScale == Vector3.zero) {
+            inventoryUI.transform.localScale = Vector3.one;
         }
     }
 

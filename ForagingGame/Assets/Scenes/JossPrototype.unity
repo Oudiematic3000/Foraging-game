@@ -1358,6 +1358,7 @@ MonoBehaviour:
   crouchSpeed: 1.5
   isCrouching: 0
   toolUI: {fileID: 1145048016}
+  inventoryUI: {fileID: 1808294226}
 --- !u!1 &1364720451
 GameObject:
   m_ObjectHideFlags: 0
