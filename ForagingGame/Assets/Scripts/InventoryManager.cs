@@ -21,7 +21,9 @@ public class InventoryManager : MonoBehaviour
     public void AddInventory(Ingredient item)
     {
         invItem.SetUp(item);
+        this.transform.localScale = Vector3.one;
         Instantiate(invItem, FindSlot().transform.position,Quaternion.identity, FindSlot().transform);
+        this.transform.localScale = Vector3.zero;
     }
     private GameObject FindSlot()
     {
