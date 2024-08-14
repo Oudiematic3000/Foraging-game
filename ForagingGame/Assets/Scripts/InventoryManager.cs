@@ -21,7 +21,14 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isOpen)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
+        }
 
     }
     public void AddInventory(Ingredient item)
