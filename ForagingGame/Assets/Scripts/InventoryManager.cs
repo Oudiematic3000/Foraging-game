@@ -20,10 +20,25 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddInventory(Ingredient item)
     {
-        invItem.SetUp(item);
-        this.transform.localScale = Vector3.one;
-        Instantiate(invItem, FindSlot().transform.position,Quaternion.identity, FindSlot().transform);
-        this.transform.localScale = Vector3.zero;
+        bool isDuplicate = false;
+        for (int i =0; i<slots.Length; i++)
+        {
+        
+            InvItem slotItem = slots[i].GetComponentInChildren<InvItem>();
+            if(slotItem != null && slotItem.ingredient == item)
+            {
+                slotItem.itemCount++;
+                slotItem.RefreshCount();
+                isDuplicate = true;
+            }
+        }
+        if (isDuplicate == false)
+        {
+            invItem.SetUp(item);
+            this.transform.localScale = Vector3.one;
+            Instantiate(invItem, FindSlot().transform.position, Quaternion.identity, FindSlot().transform);
+            this.transform.localScale = Vector3.zero;
+        }
     }
     private GameObject FindSlot()
     {
@@ -39,4 +54,6 @@ public class InventoryManager : MonoBehaviour
         return slots[0];
         
     }
+
+    
 }
