@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: RockSalt
+  m_Name: MarbledBeef
   m_EditorClassIdentifier: 
-  ingredientName: Rock Salt
+  ingredientName: Marbled Beef
   flavours:
-  - Salty
-  ingredientType: 1
-  ingredientDescription: A neutral, coarse salt. It was probably licked by something
-    before you harvested it.
+  - Umami
+  - Buttery
+  ingredientType: 0
+  ingredientDescription: Rich and lavish shard of beef harvested from a marble cow.
   toolNeeded: 1
+  mesh: {fileID: 0}
+  material: {fileID: 2100000, guid: bfe840013b1e840cdbc00d83632179e8, type: 2}

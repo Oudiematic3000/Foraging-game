@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: VegetableOil
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  ingredientName: Vegetable Oil
+  ingredientName: Potato
   flavours:
-  - Neutral
-  ingredientType: Fat
-  ingredientDescription: Drilled up from large deposits of compacted vegetables deep
-    underground.
-  toolNeeded: 1
+  - Buttery
+  - Earthy
+  ingredientType: 3
+  ingredientDescription: Potato mice dig up potatoes from deep beneath the ground
+    and transport them between burrows for storage.
+  toolNeeded: 0
+  mesh: {fileID: 0}
+  material: {fileID: 2100000, guid: df6219926368041ac926da7e3dbc92c7, type: 2}

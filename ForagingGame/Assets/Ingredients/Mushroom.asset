@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: BellPepper
+  m_Name: Mushroom
   m_EditorClassIdentifier: 
-  ingredientName: Bell Pepper
+  ingredientName: Mushroom
   flavours:
+  - Umami
   - Sweet
   ingredientType: 2
-  ingredientDescription: Sings with flavour. Notes of tart sweetness and slight fruitiness.
+  ingredientDescription: Earthy and sweet when cooked.
   toolNeeded: 0
+  mesh: {fileID: 0}
+  material: {fileID: 2100000, guid: 942b37fbd038f71468afe0c1e11ab8eb, type: 2}

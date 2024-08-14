@@ -12,6 +12,7 @@ public class Ingredient : ScriptableObject
     public string ingredientDescription;
     public Tool toolNeeded;
     public Mesh mesh;
+    public Material material;
 
     public enum Tool
     {
@@ -26,5 +27,10 @@ public class Ingredient : ScriptableObject
         Produce,
         Starch,
         Fat
+    }
+
+    public string toString()
+    {
+        return ingredientName + "\n\n" + ingredientDescription;
     }
 }

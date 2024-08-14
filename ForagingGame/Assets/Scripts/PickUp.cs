@@ -9,6 +9,7 @@ public class PickUp: MonoBehaviour
     void Start()
     {
         this.name=ingredient.ingredientName;
+        this.GetComponent<Renderer>().material=ingredient.material;
     }
 
     // Update is called once per frame

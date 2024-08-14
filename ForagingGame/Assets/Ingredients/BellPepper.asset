@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: MarbledBeef
+  m_Name: BellPepper
   m_EditorClassIdentifier: 
-  ingredientName: Marbled Beef
+  ingredientName: Bell Pepper
   flavours:
-  - Umami
-  - Buttery
-  ingredientType: Protein
-  ingredientDescription: Rich and lavish shard of beef harvested from a marble cow.
-  toolNeeded: 1
+  - Sweet
+  ingredientType: 2
+  ingredientDescription: Sings with flavour. Notes of tart sweetness and slight fruitiness.
+  toolNeeded: 0
+  mesh: {fileID: 0}
+  material: {fileID: 2100000, guid: 425c69e03cc389e4bba31639f8931290, type: 2}

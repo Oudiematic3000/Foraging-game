@@ -262,9 +262,11 @@ public class FirstPersonControls : MonoBehaviour
         if(inventoryUI.transform.localScale == Vector3.one)
         {
             inventoryUI.transform.localScale = Vector3.zero;
+            inventory.isOpen=false;
         }
         else if(inventoryUI.transform.localScale == Vector3.zero) {
             inventoryUI.transform.localScale = Vector3.one;
+            inventory.isOpen=true;
         }
     }
 

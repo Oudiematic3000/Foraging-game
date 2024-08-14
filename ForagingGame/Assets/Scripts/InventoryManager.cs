@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject[] slots;
      public InvItem invItem;
+    public bool isOpen=false;
 
     void Start()
     {
+        transform.localScale = Vector3.zero;
         
     }
 
@@ -17,6 +22,7 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         
+
     }
     public void AddInventory(Ingredient item)
     {
@@ -28,7 +34,7 @@ public class InventoryManager : MonoBehaviour
             if(slotItem != null && slotItem.ingredient == item)
             {
                 slotItem.itemCount++;
-                slotItem.RefreshCount();
+                slotItem.RefreshCount();   
                 isDuplicate = true;
             }
         }
