@@ -92,9 +92,12 @@ public class FirstPersonControls : MonoBehaviour
         //Subscribe to the pick-up input event
         playerInput.Player.ToggleInventory.performed += ctx => ToggleInventory(); // Call the PickUpObject method when pick-up input is performed
 
+        //Subscribe to the pick-up input event
+        playerInput.Player.ToggleCookbook.performed += ctx => ToggleCookbook(); // Call the PickUpObject method when pick-up input is performed
 
-    // Subscribe to the SwitchTool input events
-    playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
+
+        // Subscribe to the SwitchTool input events
+        playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
         playerInput.Player.SwitchTool.performed += ctx => SwitchTool();
 
         // Subscribe to the crouch input event
@@ -281,11 +284,15 @@ public class FirstPersonControls : MonoBehaviour
         {
             cookbookUI.transform.localScale = Vector3.zero;
             inventory.isOpen = false;
+
+
         }
         else if (cookbookUI.transform.localScale == Vector3.zero)
         {
             cookbookUI.transform.localScale = Vector3.one;
             inventory.isOpen = true;
+
+
         }
     }
 
