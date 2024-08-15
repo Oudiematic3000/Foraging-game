@@ -21,3 +21,6 @@ MonoBehaviour:
   toolNeeded: 1
   mesh: {fileID: 0}
   material: {fileID: 2100000, guid: 427b9c306b8dfa9429d10fd4cadae462, type: 2}
+  color:
+    serializedVersion: 2
+    rgba: 4294967295

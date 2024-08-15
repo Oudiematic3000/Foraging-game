@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InvItem : MonoBehaviour, IPointerEnterHandler
 {
@@ -11,6 +12,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     public TextMeshProUGUI itemText;
     public int itemCount = 1;
     public bool selected = false;
+    public Image itemSprite;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     public void SetUp(Ingredient item) 
     {
         this.ingredient = item;
+        itemSprite.color = item.color;
         
 
     }

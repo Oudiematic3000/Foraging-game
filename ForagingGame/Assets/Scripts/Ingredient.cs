@@ -13,6 +13,7 @@ public class Ingredient : ScriptableObject
     public Tool toolNeeded;
     public Mesh mesh;
     public Material material;
+    public Color32 color;
 
     public enum Tool
     {
