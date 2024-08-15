@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InvItem : MonoBehaviour, IPointerEnterHandler
+public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     public Ingredient ingredient;
     public int quantity;
@@ -13,7 +13,8 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     public int itemCount = 1;
     public bool selected = false;
     public Image itemSprite;
-
+    public bool waitingSelection=false;
+    public System.Action<Ingredient> callback;
     void Start()
     {
         RefreshCount();
@@ -24,18 +25,37 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     {
         
     }
+    void OnEnable()
+    {
+        CookBookManager.waitForIngredient += waitForIngredient;
+    }
+    public void waitForIngredient(System.Action<Ingredient> callback)
+    {
+        this.callback=callback;
+    }
 
     public void SetUp(Ingredient item) 
     {
         this.ingredient = item;
         itemSprite.color = item.color;
-        
-
     }
+
+
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         displayInfo();
     }
+
+    public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
+        if(callback!=null && cookbook.waiting)
+        {
+            callback.Invoke(ingredient);
+        }
+        
+    }
+
 
     public void RefreshCount()
     {

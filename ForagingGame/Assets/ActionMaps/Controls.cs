@@ -98,6 +98,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleCookbook"",
+                    ""type"": ""Button"",
+                    ""id"": ""060635d7-076f-4c52-a371-284de0b5c234"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c5268eb-f131-4c58-be87-21850cb7081e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ToggleCookbook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -414,6 +434,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_SwitchTool = m_Player.FindAction("SwitchTool", throwIfNotFound: true);
         m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
+        m_Player_ToggleCookbook = m_Player.FindAction("ToggleCookbook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -483,6 +504,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_SwitchTool;
     private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_ToggleCookbook;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -495,6 +517,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @SwitchTool => m_Wrapper.m_Player_SwitchTool;
         public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        public InputAction @ToggleCookbook => m_Wrapper.m_Player_ToggleCookbook;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -528,6 +551,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleInventory.started += instance.OnToggleInventory;
             @ToggleInventory.performed += instance.OnToggleInventory;
             @ToggleInventory.canceled += instance.OnToggleInventory;
+            @ToggleCookbook.started += instance.OnToggleCookbook;
+            @ToggleCookbook.performed += instance.OnToggleCookbook;
+            @ToggleCookbook.canceled += instance.OnToggleCookbook;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -556,6 +582,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleInventory.started -= instance.OnToggleInventory;
             @ToggleInventory.performed -= instance.OnToggleInventory;
             @ToggleInventory.canceled -= instance.OnToggleInventory;
+            @ToggleCookbook.started -= instance.OnToggleCookbook;
+            @ToggleCookbook.performed -= instance.OnToggleCookbook;
+            @ToggleCookbook.canceled -= instance.OnToggleCookbook;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -601,5 +630,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSwitchTool(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
+        void OnToggleCookbook(InputAction.CallbackContext context);
     }
 }

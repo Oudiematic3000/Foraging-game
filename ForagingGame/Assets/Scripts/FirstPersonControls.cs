@@ -51,6 +51,7 @@ public class FirstPersonControls : MonoBehaviour
     [Space(5)]
     public TextMeshProUGUI toolUI;
     public GameObject inventoryUI;
+    public GameObject cookbookUI;
 
     
 
@@ -274,7 +275,21 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    
+    public void ToggleCookbook()
+    {
+        if (cookbookUI.transform.localScale == Vector3.one)
+        {
+            cookbookUI.transform.localScale = Vector3.zero;
+            inventory.isOpen = false;
+        }
+        else if (cookbookUI.transform.localScale == Vector3.zero)
+        {
+            cookbookUI.transform.localScale = Vector3.one;
+            inventory.isOpen = true;
+        }
+    }
+
+
 
     // Pick up the object         --Leaving this old code here in case we find a use for it
     /*  heldTool = hit.collider.gameObject;
