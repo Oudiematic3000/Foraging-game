@@ -32,6 +32,6 @@ public class Ingredient : ScriptableObject
 
     public string toString()
     {
-        return ingredientName + "\n\n" + ingredientDescription;
+        return ingredientName + "\n\n" +ingredientType+"\n\n"+ ingredientDescription;
     }
 }

@@ -16,20 +16,20 @@ public class SteakAndChips
         recipeName = "Steak and Chips";
 
         Element steak = new Element("Steak", 3);
-        steak.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/MarbledBeef.asset"));
-        steak.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/RockSalt.asset"));
-        steak.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/VegetableOil.asset"));
+        steak.addIngredient(Resources.Load<Ingredient>("Ingredients/MarbledBeef"));
+        steak.addIngredient(Resources.Load<Ingredient>("Ingredients/RockSalt"));
+        steak.addIngredient(Resources.Load<Ingredient>("Ingredients/VegetableOil"));
         elements[0] = steak;
 
         Element sauce = new Element("Sauce", 2);
-        sauce.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/Mushroom.asset"));
-        sauce.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/BellPepper.asset"));
+        sauce.addIngredient(Resources.Load<Ingredient>("Ingredients/Mushroom"));
+        sauce.addIngredient(Resources.Load<Ingredient>("Ingredients/BellPepper"));
         elements[1] = sauce;
 
         Element chips = new Element("Chips", 3);
-        chips.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/Potato.asset"));
-        chips.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/RockSalt.asset"));
-        chips.addIngredient(AssetDatabase.LoadAssetAtPath<Ingredient>("Assets/Ingredients/VegetableOil.asset"));
+        chips.addIngredient(Resources.Load<Ingredient>("Ingredients/Potato"));
+        chips.addIngredient(Resources.Load<Ingredient>("Ingredients/RockSalt"));
+        chips.addIngredient(Resources.Load<Ingredient>("Ingredients/VegetableOil"));
         elements[2] = chips;
     }
 
