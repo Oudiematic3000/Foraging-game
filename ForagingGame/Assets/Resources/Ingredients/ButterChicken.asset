@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
   m_Name: ButterChicken
   m_EditorClassIdentifier: 
-  ingredientName: 
-  flavours: []
+  ingredientName: Butter Chicken
+  flavours:
+  - Buttery
   ingredientType: 0
-  ingredientDescription: 
+  ingredientDescription: Made of butter, still somehow a protein.
   toolNeeded: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 81a7b3fb99e984cb0a7a85e94d32a98e, type: 2}
   color:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4291229439
