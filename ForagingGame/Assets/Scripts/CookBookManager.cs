@@ -142,9 +142,82 @@ public class CookBookManager : MonoBehaviour
         }
     }
 
-    public void checkIngredient(int i, Ingredient ing)
+    public void checkIngredient(int k)
     {
+        Ingredient[] targetGuessArray;
+        Ingredient[] targetCheckArray;
+        Button[] buttonArray;
         
+        switch (k)
+        {
+            case 1:
+                targetGuessArray = elem1Guesses;
+                targetCheckArray = steakAndChips.elements[0].elemIngredients;
+                buttonArray = buttons1;
+                break;
+            case 2:
+                targetGuessArray = elem2Guesses;
+                targetCheckArray = steakAndChips.elements[1].elemIngredients;
+                buttonArray = buttons2;
+                break;
+            case 3:
+                targetGuessArray = elem3Guesses;
+                targetCheckArray = steakAndChips.elements[2].elemIngredients;
+                buttonArray = buttons3;
+                break;
+            default:
+                targetGuessArray = elem1Guesses;
+                targetCheckArray = steakAndChips.elements[0].elemIngredients;
+                buttonArray = buttons1;
+                break;
+        }
+
+        for(int i = 0; i < targetGuessArray.Length; i++)
+        {
+            for(int j = 0; j < targetCheckArray.Length; j++)
+            {
+                if (targetGuessArray[i] == targetCheckArray[j])
+                {
+                    buttonArray[i].image.color = Color.green;
+                    break;
+                }
+                
+                {
+                    int flavourMatch = 0;
+                    if (targetGuessArray[i] != null) {
+                        for (int m = 0; m < targetGuessArray[i].flavours.Length; m++)
+                        {
+                            
+                            for (int n = 0; n < targetCheckArray[i].flavours.Length; n++)
+                            {
+                                Debug.Log(targetGuessArray[i].flavours[m] + " vs " + targetCheckArray[i].flavours[n]);
+                                if (targetGuessArray[i].flavours[m] == targetCheckArray[i].flavours[n])
+                                {
+                                    flavourMatch++;
+                                    buttonArray[i].image.color = Color.yellow;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(flavourMatch == 0)
+                    {
+                        buttonArray[i].image.color=Color.red;
+                    }
+                }
+            }
+        }
+        //foreach(Ingredient guess in targetGuessArray)
+        //{
+        //    foreach(Ingredient check in targetCheckArray)
+        //    {
+        //        if (check == guess)
+        //        {
+
+        //        }
+        //    }
+        //}
     }
     
 }
