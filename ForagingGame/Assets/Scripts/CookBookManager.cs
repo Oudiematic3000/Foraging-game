@@ -98,7 +98,7 @@ public class CookBookManager : MonoBehaviour
         Debug.Log(ingredient.ToString());
         SetGuesses(target, index, ingredient);
         waiting = false;
-        inventory.transform.localScale = Vector3.zero;
+        
     }
     public void SetGuesses(int i, int j, Ingredient ing)
     {
