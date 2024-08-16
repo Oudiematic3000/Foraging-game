@@ -98,7 +98,7 @@ public class CookBookManager : MonoBehaviour
         Debug.Log(ingredient.ToString());
         SetGuesses(target, index, ingredient);
         waiting = false;
-        inventory.transform.localScale = Vector3.zero;
+        
     }
     public void SetGuesses(int i, int j, Ingredient ing)
     {
@@ -113,6 +113,7 @@ public class CookBookManager : MonoBehaviour
                 }
                 else
                 {
+                    StartCoroutine(BlinkRed(buttons1[j]));
                     Debug.Log("Wrong type (Needs: "+ steakAndChips.elements[0].elemIngredients[j].ingredientType);
                 }
                 
@@ -208,16 +209,20 @@ public class CookBookManager : MonoBehaviour
                 }
             }
         }
-        //foreach(Ingredient guess in targetGuessArray)
-        //{
-        //    foreach(Ingredient check in targetCheckArray)
-        //    {
-        //        if (check == guess)
-        //        {
-
-        //        }
-        //    }
-        //}
+        
     }
-    
+
+    public IEnumerator BlinkRed(Button button)
+    {
+        button.image.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        button.image.color = Color.white;
+        yield return new WaitForSeconds(0.2f);
+        button.image.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        button.image.color = Color.white;
+
+
+    }
+
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   ingredientName: Vegetable Oil
   flavours:
   - Neutral
-  ingredientType: 0
+  ingredientType: 4
   ingredientDescription: Drilled up from large deposits of compacted vegetables deep
     underground.
   toolNeeded: 1
