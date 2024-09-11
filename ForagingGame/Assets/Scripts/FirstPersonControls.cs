@@ -23,6 +23,7 @@ public class FirstPersonControls : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
+    private bool onSteepSlope = false;
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -171,10 +172,28 @@ public class FirstPersonControls : MonoBehaviour
 
     public void Jump()
     {
-        if (characterController.isGrounded)
+        CheckSteepSlope();
+        if (characterController.isGrounded && !onSteepSlope)
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+    private void CheckSteepSlope()
+    {
+        Vector3 rayOrigin = transform.position + Vector3.down * 1f;
+        float rayLength = characterController.height / 2 + 0.5f; // Adjust the length to ensure it reaches the ground
+
+        // Use raycast to determine slope angle beneath the player
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, rayLength))
+        {
+            float angle = Vector3.Angle(hit.normal, Vector3.up);
+            Debug.Log(angle);
+            onSteepSlope = angle >= GetComponent<CharacterController>().slopeLimit;
+        }
+        else
+        {
+            onSteepSlope = false;
         }
     }
 
