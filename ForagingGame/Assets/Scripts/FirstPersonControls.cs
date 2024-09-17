@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -14,9 +15,10 @@ public class FirstPersonControls : MonoBehaviour
     // Public variables to set movement and look speed, and the player camera
     public float moveSpeed; // Speed at which the player moves
     public float lookSpeed; // Sensitivity of the camera movement
-    public float gravity = -9.81f; // Gravity value
+    public float gravity = -10.2f; // Gravity value
     public float jumpHeight = 1.0f; // Height of the jump
     public Transform playerCamera; // Reference to the player's camera
+    public float airSpeed;
                                    // Private variables to store input values and the character controller
     private Vector2 moveInput; // Stores the movement input from the player
     private Vector2 lookInput; // Stores the look input from the player
@@ -24,6 +26,7 @@ public class FirstPersonControls : MonoBehaviour
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
     private bool onSteepSlope = false;
+
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -44,7 +47,7 @@ public class FirstPersonControls : MonoBehaviour
     [Header("CROUCH SETTINGS")]
     [Space(5)]
     public float crouchHeight = 1;
-    public float standHeight = 2;
+    public float standHeight;
     public float crouchSpeed = 1.5f;
     public bool isCrouching = false;
 
@@ -62,7 +65,6 @@ public class FirstPersonControls : MonoBehaviour
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
-      
     }
 
     private void OnEnable()
@@ -121,6 +123,10 @@ public class FirstPersonControls : MonoBehaviour
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
+        }
+        else if(!characterController.isGrounded)
+        {
+            currentSpeed = airSpeed;
         }
         else
         {
@@ -274,13 +280,17 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (isCrouching)
         {
-            characterController.height=standHeight;
+           
+           characterController.height=standHeight;
             isCrouching = false;
+            
         }
         else
         {
             characterController.height = crouchHeight;
             isCrouching = true;
+            
+           
         }
     }
 
