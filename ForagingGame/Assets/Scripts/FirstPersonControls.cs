@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class FirstPersonControls : MonoBehaviour
     public float jumpHeight = 1.0f; // Height of the jump
     public Transform playerCamera; // Reference to the player's camera
     public float airSpeed;
+    public Vector3 slopeNormal;
                                    // Private variables to store input values and the character controller
     private Vector2 moveInput; // Stores the movement input from the player
     private Vector2 lookInput; // Stores the look input from the player
@@ -184,6 +186,20 @@ public class FirstPersonControls : MonoBehaviour
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        else if(characterController.isGrounded && onSteepSlope)
+        {
+            
+            //velocity = 5*Vector3.down;
+        }
+    }
+    public void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        CheckSteepSlope();
+        if(hit.gameObject.CompareTag("Ground") && onSteepSlope)
+        {
+            characterController.Move(20 * hit.normal * Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, transform.position + hit.normal*3, 0.5f);
+        }
     }
     private void CheckSteepSlope()
     {
@@ -193,6 +209,7 @@ public class FirstPersonControls : MonoBehaviour
         // Use raycast to determine slope angle beneath the player
         if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, rayLength))
         {
+            slopeNormal = hit.normal;
             float angle = Vector3.Angle(hit.normal, Vector3.up);
             Debug.Log(angle);
             onSteepSlope = angle >= GetComponent<CharacterController>().slopeLimit;
