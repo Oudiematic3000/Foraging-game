@@ -194,12 +194,12 @@ public class FirstPersonControls : MonoBehaviour
     }
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        CheckSteepSlope();
+        /*CheckSteepSlope();
         if(hit.gameObject.CompareTag("Ground") && onSteepSlope)
         {
             characterController.Move(20 * hit.normal * Time.deltaTime);
             //transform.position = Vector3.Lerp(transform.position, transform.position + hit.normal*3, 0.5f);
-        }
+        } */
     }
     private void CheckSteepSlope()
     {
