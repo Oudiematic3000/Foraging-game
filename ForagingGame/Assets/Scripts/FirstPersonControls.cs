@@ -271,10 +271,7 @@ public class FirstPersonControls : MonoBehaviour
 
                
             }
-            else if (hit.collider.CompareTag("Gun"))
-            {
-                
-            }
+           
         }
     }
 
