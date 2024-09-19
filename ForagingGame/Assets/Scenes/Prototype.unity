@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: BGM
-    volume: 0.8
+    volume: 0.521
     filter: 0.045
     clip: {fileID: 8300000, guid: f6e3921264f45b8438e13b26c90b2398, type: 3}
     source: {fileID: 559079931}
