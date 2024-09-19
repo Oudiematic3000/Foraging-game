@@ -192,15 +192,15 @@ public class FirstPersonControls : MonoBehaviour
             //velocity = 5*Vector3.down;
         }
     }
-    public void OnControllerColliderHit(ControllerColliderHit hit)
+   /* public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        /*CheckSteepSlope();
+        CheckSteepSlope();
         if(hit.gameObject.CompareTag("Ground") && onSteepSlope)
         {
-            characterController.Move(20 * hit.normal * Time.deltaTime);
+            //characterController.Move(20 * new Vector3(hit.normal.x,-hit.normal.y,hit.normal.z) * Time.deltaTime);
             //transform.position = Vector3.Lerp(transform.position, transform.position + hit.normal*3, 0.5f);
-        } */
-    }
+        } 
+    }*/
     private void CheckSteepSlope()
     {
         Vector3 rayOrigin = transform.position + Vector3.down * 1f;
