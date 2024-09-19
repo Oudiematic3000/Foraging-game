@@ -37,7 +37,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     public void SetUp(Ingredient item) 
     {
         this.ingredient = item;
-        
+        itemSprite.sprite=ingredient.sprite;
     }
 
 

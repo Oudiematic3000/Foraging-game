@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="ingredient", menuName ="ingredient")]
 public class Ingredient : ScriptableObject
@@ -11,7 +12,7 @@ public class Ingredient : ScriptableObject
     public Type ingredientType;
     public string ingredientDescription;
     public Tool toolNeeded;
-
+    public Sprite sprite;
     
 
     public enum Tool
