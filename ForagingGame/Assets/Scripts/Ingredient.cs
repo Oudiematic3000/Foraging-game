@@ -18,7 +18,15 @@ public class Ingredient : ScriptableObject
     public enum Tool
     {
         None,
-        Drill
+        Drill,
+        Scraper
+    }
+
+    public enum Harvest
+    {
+        Take,
+        Drill,
+        Scrape
     }
 
     public enum Type

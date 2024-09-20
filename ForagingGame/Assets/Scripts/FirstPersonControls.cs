@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -41,10 +42,13 @@ public class FirstPersonControls : MonoBehaviour
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
     private Ingredient.Tool heldTool=Ingredient.Tool.None; // Reference to the currently held object
+    private int toolIndex=0;
+    public List<Ingredient.Tool> ownedTools;
     private float scrollInput;
     public float pickUpRange = 3f; // Range within which objects can be picked up
-    private bool holdingGun = false;
+    private bool holdingOscie = false;
     public InventoryManager inventory;
+    public Oscie oscie;
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -58,7 +62,9 @@ public class FirstPersonControls : MonoBehaviour
     public TextMeshProUGUI toolUI;
     public GameObject inventoryUI;
     public GameObject cookbookUI;
-
+    public GameObject interactUI;
+    public TextMeshProUGUI interactToolText, interactObjectText;
+    
     
 
 
@@ -67,6 +73,7 @@ public class FirstPersonControls : MonoBehaviour
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
+        
     }
 
     private void OnEnable()
@@ -88,8 +95,6 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the jump input event
         playerInput.Player.Jump.performed += ctx => Jump(); // Call the Jump method when jump input is performed
 
-        // Subscribe to the shoot input event
-        playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
 
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
@@ -117,6 +122,8 @@ public class FirstPersonControls : MonoBehaviour
         Move();
         LookAround();
         ApplyGravity();
+        hoverItem();
+
     }
 
     public void Move()
@@ -178,6 +185,56 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
     }
 
+    public void hoverItem()
+    {
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, pickUpRange))
+        {
+            interactUI.SetActive(true);
+            if (hit.collider.CompareTag("Interactable"))
+            {
+                interactObjectText.text = hit.collider.name;
+                if (hit.collider.GetComponent<PickUp>() != null && holdingOscie)
+                {
+                    
+                    if ((hit.collider.GetComponent<PickUp>().ingredient.toolNeeded) == heldTool)
+                    {
+                        interactToolText.text = ((Ingredient.Harvest)(hit.collider.GetComponent<PickUp>().ingredient.toolNeeded)).ToString();
+                    }
+                    else
+                    {
+                        interactToolText.text = "Incorrect tool";
+                    }
+                }
+                else if (hit.collider.GetComponent<Tool>() && holdingOscie)
+                {
+                    interactToolText.text = "Take";
+                    
+                }
+                else if (hit.collider.GetComponent<Oscie>())
+                {
+                    interactToolText.text = "Interact";
+                    
+                }
+                else if (hit.collider.GetComponent<Obstacle>())
+                {
+                    interactToolText.text = ((Ingredient.Harvest)(hit.collider.GetComponent<Obstacle>().toolneeded)).ToString();
+
+                }
+            }
+            else
+            {
+                interactUI.SetActive(false);
+            }
+
+        }
+        else
+        {
+            interactUI.SetActive(false);
+        }
+    }
+
     public void Jump()
     {
         CheckSteepSlope();
@@ -220,48 +277,26 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    public void Shoot()
-    {
-        if (holdingGun == true)
-        {
-            // Instantiate the projectile at the fire point
-            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-            // Get the Rigidbody component of the projectile and set its velocity
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.velocity = firePoint.forward * projectileSpeed;
-
-            // Destroy the projectile after 3 seconds
-            Destroy(projectile, 3f);
-        }
-    }
+    
 
     public void PickUpObject()
     {
-        // Check if we are already holding an object
-       /* if (heldTool != null)
-        {
-            heldTool.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldTool.transform.parent = null;
-            holdingGun = false;
-        }
-       */
+      
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
-        // Debugging: Draw the ray in the Scene view
-        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 2f);
 
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.GetComponent<PickUp>()!=null)
+            if (hit.collider.GetComponent<PickUp>() != null)
             {
-                Ingredient hitIngredient=hit.collider.GetComponent<PickUp>().ingredient;
-            
-                if (hitIngredient.toolNeeded==heldTool) {
+                Ingredient hitIngredient = hit.collider.GetComponent<PickUp>().ingredient;
+
+                if (hitIngredient.toolNeeded == heldTool && holdingOscie)
+                {
 
                     //TODO: take hitIngredient template and create a new invItem with the same template in inventory
                     inventory.AddInventory(hitIngredient);
@@ -269,7 +304,25 @@ public class FirstPersonControls : MonoBehaviour
 
                 }
 
-               
+
+            }
+            else if (hit.collider.GetComponent<Tool>() != null)
+            {
+                ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
+                Destroy(hit.collider.gameObject);
+            }else if (hit.collider.GetComponent<Oscie>())
+            {
+                hit.collider.transform.position = holdPosition.position;
+                hit.collider.transform.rotation = holdPosition.rotation;
+                hit.collider.transform.Rotate(new Vector3(0, 180, 0));
+                hit.collider.transform.parent = holdPosition;
+                holdingOscie = true;
+                ownedTools.Add(Ingredient.Tool.None);
+
+            }else if (hit.collider.GetComponent<Obstacle>())
+            {
+                if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded)Destroy(hit.collider.gameObject);
+              
             }
            
         }
@@ -277,17 +330,24 @@ public class FirstPersonControls : MonoBehaviour
 
     public void SwitchTool()
     {
-        
-        heldTool += (int)scrollInput;
-        if (heldTool < 0)
+        if (holdingOscie)
         {
-            heldTool= 0;
+            toolIndex += (int)scrollInput;
+
+
+            if (toolIndex < 0)
+            {
+                toolIndex = 0;
+            }
+            else if (toolIndex > ownedTools.Count - 1)
+            {
+                toolIndex = ownedTools.Count - 1;
+            }
+            
+            heldTool = ownedTools[toolIndex];
+            oscie.showTool((int)heldTool);
+          
         }
-        else if ((int)heldTool > 1)
-        {
-            heldTool = Ingredient.Tool.Drill;
-        }
-        toolUI.text = heldTool.ToString();
     }
 
     public void Crouch()
