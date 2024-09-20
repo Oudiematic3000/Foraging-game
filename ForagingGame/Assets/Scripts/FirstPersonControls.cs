@@ -64,6 +64,7 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject cookbookUI;
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
+    public GameObject dialogUI;
     
     
 
@@ -306,7 +307,7 @@ public class FirstPersonControls : MonoBehaviour
 
 
             }
-            else if (hit.collider.GetComponent<Tool>() != null)
+            else if (hit.collider.GetComponent<Tool>() != null && holdingOscie)
             {
                 ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
                 Destroy(hit.collider.gameObject);
@@ -348,6 +349,13 @@ public class FirstPersonControls : MonoBehaviour
             oscie.showTool((int)heldTool);
           
         }
+    }
+
+    private void OnTriggerEnter(Collider hit)
+    {
+
+            dialogUI.GetComponent<Dialogue>().startDialogue();
+            Destroy(hit.gameObject);
     }
 
     public void Crouch()
@@ -401,26 +409,6 @@ public class FirstPersonControls : MonoBehaviour
 
 
 
-    // Pick up the object         --Leaving this old code here in case we find a use for it
-    /*  heldTool = hit.collider.gameObject;
-      heldTool.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
-
-      // Attach the object to the hold position
-      heldTool.transform.position = holdPosition.position;
-      heldTool.transform.rotation = holdPosition.rotation;
-      heldTool.transform.parent = holdPosition;
-    */
-
-    // Pick up the object
-    /*  heldTool = hit.collider.gameObject;
-      heldTool.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
-
-      // Attach the object to the hold position
-      heldTool.transform.position = holdPosition.position;
-      heldTool.transform.rotation = holdPosition.rotation;
-      heldTool.transform.parent = holdPosition;
-
-      holdingGun = true;
-    */
+    
 
 }

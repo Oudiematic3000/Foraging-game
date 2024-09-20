@@ -8,12 +8,11 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textbox;
     public string[] text;
     public float speed;
-    private int index;
     public AudioManager audioManager;
     void Start()
     {
         textbox.text = "";
-        startDialogue();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,19 +21,28 @@ public class Dialogue : MonoBehaviour
         
     }
 
-    void startDialogue()
+   public void startDialogue()
     {
-        index=0;
+        gameObject.SetActive(true);
+       
         StartCoroutine(typeLine());
     }
-    
+
     public IEnumerator typeLine()
     {
-        foreach(char c in text[index].ToCharArray())
+        for (int i = 0; i < text.Length; i++)
         {
-            textbox.text += c;
-            yield return new WaitForSeconds(speed);
-            audioManager.sounds[1].source.Play();
+            transform.localScale = Vector3.one*(0.75f);
+            foreach (char c in text[i].ToCharArray())
+            {
+                textbox.text += c;
+                yield return new WaitForSeconds(speed);
+
+                audioManager.sounds[1].source.PlayOneShot(audioManager.sounds[1].clip);
+            }
+            yield return new WaitForSeconds(1f);
+            transform.localScale = Vector3.zero;
+            textbox.text = "";
         }
     }
 }
