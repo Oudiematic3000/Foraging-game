@@ -10,16 +10,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     void Awake()
     {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-
+        
 
         foreach (Sound s in sounds)
         {

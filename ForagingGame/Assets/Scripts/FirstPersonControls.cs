@@ -62,17 +62,18 @@ public class FirstPersonControls : MonoBehaviour
     public TextMeshProUGUI toolUI;
     public GameObject inventoryUI;
     public GameObject cookbookUI;
+
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
     public GameObject dialogUI;
-    
-    
 
 
+    public static FirstPersonControls instance;
+    
 
     private void Awake()
     {
-        // Get and store the CharacterController component attached to this GameObject
+        inventory = FindAnyObjectByType<InventoryManager>();
         characterController = GetComponent<CharacterController>();
         
     }
@@ -103,9 +104,7 @@ public class FirstPersonControls : MonoBehaviour
         //Subscribe to the pick-up input event
         playerInput.Player.ToggleInventory.performed += ctx => ToggleInventory(); // Call the PickUpObject method when pick-up input is performed
 
-        //Subscribe to the pick-up input event
         playerInput.Player.ToggleCookbook.performed += ctx => ToggleCookbook(); // Call the PickUpObject method when pick-up input is performed
-
 
         // Subscribe to the SwitchTool input events
         playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
@@ -222,6 +221,12 @@ public class FirstPersonControls : MonoBehaviour
                 {
                     interactToolText.text = ((Ingredient.Harvest)(hit.collider.GetComponent<Obstacle>().toolneeded)).ToString();
 
+                }else if (hit.collider.GetComponent<Pot>())
+                {
+                    interactToolText.text = "Cook";
+                }else if (hit.collider.GetComponent<Door>())
+                {
+                    interactToolText.text = "Enter";
                 }
             }
             else
@@ -324,6 +329,12 @@ public class FirstPersonControls : MonoBehaviour
             {
                 if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded)Destroy(hit.collider.gameObject);
               
+            }else if (hit.collider.GetComponent<Door>())
+            {
+                hit.collider.GetComponent<Door>().changeScene();
+            }else if (hit.collider.GetComponent<Pot>())
+            {
+                hit.collider.GetComponent<Pot>().ToggleCookbook();
             }
            
         }
@@ -353,12 +364,23 @@ public class FirstPersonControls : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-
+        if (!holdingOscie)
+        {
             dialogUI.GetComponent<Dialogue>().startDialogue();
-            Destroy(hit.gameObject);
+           
+        }
+        Destroy(hit.gameObject);
     }
 
-    public void Crouch()
+    public void ToggleCookbook()
+    {
+        if (cookbookUI.transform.localScale == Vector3.one)
+        {
+            cookbookUI.transform.localScale = Vector3.zero;
+            inventory.isOpen = false;
+        }
+    }
+            public void Crouch()
     {
         if (isCrouching)
         {
@@ -389,23 +411,7 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    public void ToggleCookbook()
-    {
-        if (cookbookUI.transform.localScale == Vector3.one)
-        {
-            cookbookUI.transform.localScale = Vector3.zero;
-            inventory.isOpen = false;
-
-
-        }
-        else if (cookbookUI.transform.localScale == Vector3.zero)
-        {
-            cookbookUI.transform.localScale = Vector3.one;
-            inventory.isOpen = true;
-
-
-        }
-    }
+    
 
 
 
