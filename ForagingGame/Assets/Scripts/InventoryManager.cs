@@ -12,7 +12,21 @@ public class InventoryManager : MonoBehaviour
      public InvItem invItem;
     public bool isOpen=false;
 
-    void Start()
+    public static InventoryManager instance;
+    void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
+
+        void Start()
     {
         transform.localScale = Vector3.zero;
         

@@ -5,25 +5,16 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-
+   
     public Sound[] sounds;
     public static AudioManager instance;
     void Awake()
     {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-
+        
 
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
+            
             s.source.volume = s.volume;
             s.source.clip = s.clip;
             s.source.outputAudioMixerGroup = s.mixer;
@@ -36,10 +27,7 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-      
-    }
+
 
 }
 
