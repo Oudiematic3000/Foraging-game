@@ -1,26 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7291ea944a4e4894ab41bbd18f04e539, type: 3}
-  m_Name: RockSalt
-  m_EditorClassIdentifier: 
-  ingredientName: Rock Salt
-  flavours:
-  - Salty
-  ingredientType: 1
-  ingredientDescription: A neutral, coarse salt. It was probably licked by something
-    before you harvested it.
-  toolNeeded: 1
-  mesh: {fileID: 0}
-  material: {fileID: 2100000, guid: 427b9c306b8dfa9429d10fd4cadae462, type: 2}
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
+version https://git-lfs.github.com/spec/v1
+oid sha256:a9a04962e54feb154652a4c9d0ed437202e0a58b49d33cc4eb7ed364b280dbfc
+size 751
