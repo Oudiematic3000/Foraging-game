@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class Dialogue : MonoBehaviour
     public string[] text;
     public float speed;
     public AudioManager audioManager;
+    public static event Action typeChar;
     void Start()
     {
         textbox.text = "";
@@ -37,8 +39,7 @@ public class Dialogue : MonoBehaviour
             {
                 textbox.text += c;
                 yield return new WaitForSeconds(speed);
-
-                audioManager.sounds[1].source.PlayOneShot(audioManager.sounds[1].clip);
+                typeChar();
             }
             yield return new WaitForSeconds(1f);
             transform.localScale = Vector3.zero;

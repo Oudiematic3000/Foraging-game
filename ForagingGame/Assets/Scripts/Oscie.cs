@@ -5,7 +5,11 @@ using UnityEngine;
 public class Oscie : MonoBehaviour
 {
     public GameObject[] tools;
-    
+
+    private void Awake()
+    {
+        Dialogue.typeChar += speak;
+    }
     void Start()
     {
         foreach (GameObject go in tools)
@@ -18,6 +22,11 @@ public class Oscie : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void speak()
+    {
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
     }
 
     public void showTool(int i)
