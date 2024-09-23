@@ -48,7 +48,7 @@ public class FirstPersonControls : MonoBehaviour
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingOscie = false;
     public InventoryManager inventory;
-    public Oscie oscie;
+ 
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -357,7 +357,7 @@ public class FirstPersonControls : MonoBehaviour
             }
             
             heldTool = ownedTools[toolIndex];
-            oscie.showTool((int)heldTool);
+            holdPosition.GetChild(0).GetComponent<Oscie>().showTool((int)heldTool);
           
         }
     }
