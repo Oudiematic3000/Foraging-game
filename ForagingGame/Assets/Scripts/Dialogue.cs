@@ -11,7 +11,10 @@ public class Dialogue : MonoBehaviour
     public float speed;
     public AudioManager audioManager;
     public static event Action typeChar;
-
+    public bool isTalking=false;
+    public float waitTime;
+    private float initSpeed;
+    private float initWaitTime;
     private void Awake()
     {
         Oscie.sendDialogText += setDialog;
@@ -20,11 +23,24 @@ public class Dialogue : MonoBehaviour
     {
         textbox.text = "";
         gameObject.SetActive(false);
+        initSpeed = speed;
+        initWaitTime = waitTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            speed = 0.0001f;
+            waitTime = 0.01f;
+        }
+        else
+        {
+            speed=initSpeed;
+            waitTime=initWaitTime;
+        }
+
         
     }
 
@@ -43,6 +59,7 @@ public class Dialogue : MonoBehaviour
 
     public IEnumerator typeLine()
     {
+        isTalking = true;
         for (int i = 0; i < text.Length; i++)
         {
             transform.localScale = Vector3.one*(0.75f);
@@ -52,9 +69,10 @@ public class Dialogue : MonoBehaviour
                 yield return new WaitForSeconds(speed);
                 typeChar();
             }
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(waitTime);
             transform.localScale = Vector3.zero;
             textbox.text = "";
         }
+        isTalking=false;
     }
 }

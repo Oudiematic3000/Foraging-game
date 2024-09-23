@@ -69,7 +69,7 @@ public class FirstPersonControls : MonoBehaviour
 
 
     public static FirstPersonControls instance;
-    
+    Controls playerInput;
 
     private void Awake()
     {
@@ -81,7 +81,7 @@ public class FirstPersonControls : MonoBehaviour
     private void OnEnable()
     {
         // Create a new instance of the input actions
-        var playerInput = new Controls();
+        playerInput = new Controls();
 
         // Enable the input actions
         playerInput.Player.Enable();
@@ -319,13 +319,11 @@ public class FirstPersonControls : MonoBehaviour
                 pickedUp(hit.collider.gameObject);
             }else if (hit.collider.GetComponent<Oscie>())
             {
-                hit.collider.transform.position = holdPosition.position;
-                hit.collider.transform.rotation = holdPosition.rotation;
-                hit.collider.transform.Rotate(new Vector3(0, 180, 0));
-                hit.collider.transform.parent = holdPosition;
-                holdingOscie = true;
-                ownedTools.Add(Ingredient.Tool.None);
                 pickedUp(hit.collider.gameObject);
+                StartCoroutine(waitForDialogue(hit));
+                
+                
+                
 
             }
             else if (hit.collider.GetComponent<Obstacle>())
@@ -341,6 +339,24 @@ public class FirstPersonControls : MonoBehaviour
             }
            
         }
+    }
+
+    IEnumerator waitForDialogue(RaycastHit hit)
+    {
+        playerInput.Player.Movement.Disable();
+        playerInput.Player.Jump.Disable();
+        while (FindAnyObjectByType<Dialogue>().isTalking)
+        {
+            yield return null;
+        }
+        playerInput.Player.Movement.Enable();
+        playerInput.Player.Jump.Enable();
+        hit.collider.transform.position = holdPosition.position;
+        hit.collider.transform.rotation = holdPosition.rotation;
+        hit.collider.transform.Rotate(new Vector3(0, 180, 0));
+        hit.collider.transform.parent = holdPosition;
+        holdingOscie = true;
+        ownedTools.Add(Ingredient.Tool.None);
     }
 
     public void SwitchTool()
