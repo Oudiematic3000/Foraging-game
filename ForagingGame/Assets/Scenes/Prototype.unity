@@ -11623,6 +11623,27 @@ MonoBehaviour:
   - {fileID: 1956779901}
   - {fileID: 1804841396}
   - {fileID: 881485163}
+  osciePickupDialogue:
+  - So you're her, huh?
+  - The only witch to ever flunk culinary school.
+  - I've read your file-
+  - Quite remarkable.
+  - The dean wrote a letter of recommendation about you to the school of pyromancy.
+  - Most examinees come to this forest for their final exam, grab a couple ingredients,
+  - Throw em' in a pot and grab that diploma.
+  - Frankly, your credit total complicates that formality.
+  - But don't worry, kid!
+  - They have assigned you THE BEST,
+  - MOST RELIABLE,
+  - MOST SEXY,
+  - MOST
+  - uh MOST
+  - MOST CULTURED!
+  - Mentor and examiner in the whole department!
+  - Okie croaky, Let's start this exam.
+  - Go find some ingredients for a steak and chips.
+  - Open your notebook by pressing TAB
+  - Whatever the fuck that means.
 --- !u!82 &1497804296
 AudioSource:
   m_ObjectHideFlags: 0

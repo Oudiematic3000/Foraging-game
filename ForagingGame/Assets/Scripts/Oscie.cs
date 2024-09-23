@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,12 @@ using UnityEngine;
 public class Oscie : MonoBehaviour
 {
     public GameObject[] tools;
-
+    public static event Action<string[]> sendDialogText;
+    public string[] osciePickupDialogue;
     private void Awake()
     {
         Dialogue.typeChar += speak;
+        FirstPersonControls.pickedUp += getDialog;
     }
     void Start()
     {
@@ -23,7 +26,13 @@ public class Oscie : MonoBehaviour
     {
         
     }
-
+    public void getDialog(GameObject g)
+    {
+        if (g.GetComponent<Oscie>())
+        {
+            sendDialogText(osciePickupDialogue);
+        }
+    }
     public void speak()
     {
         GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);

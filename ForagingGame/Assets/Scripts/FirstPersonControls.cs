@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Sockets;
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -48,7 +48,7 @@ public class FirstPersonControls : MonoBehaviour
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingOscie = false;
     public InventoryManager inventory;
- 
+    public static event Action<GameObject> pickedUp;
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -316,6 +316,7 @@ public class FirstPersonControls : MonoBehaviour
             {
                 ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
                 Destroy(hit.collider.gameObject);
+                pickedUp(hit.collider.gameObject);
             }else if (hit.collider.GetComponent<Oscie>())
             {
                 hit.collider.transform.position = holdPosition.position;
@@ -324,8 +325,10 @@ public class FirstPersonControls : MonoBehaviour
                 hit.collider.transform.parent = holdPosition;
                 holdingOscie = true;
                 ownedTools.Add(Ingredient.Tool.None);
+                pickedUp(hit.collider.gameObject);
 
-            }else if (hit.collider.GetComponent<Obstacle>())
+            }
+            else if (hit.collider.GetComponent<Obstacle>())
             {
                 if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded)Destroy(hit.collider.gameObject);
               

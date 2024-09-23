@@ -11,6 +11,11 @@ public class Dialogue : MonoBehaviour
     public float speed;
     public AudioManager audioManager;
     public static event Action typeChar;
+
+    private void Awake()
+    {
+        Oscie.sendDialogText += setDialog;
+    }
     void Start()
     {
         textbox.text = "";
@@ -21,6 +26,12 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setDialog(string[] arr)
+    {
+        text= arr;
+        startDialogue();
     }
 
    public void startDialogue()
@@ -41,7 +52,7 @@ public class Dialogue : MonoBehaviour
                 yield return new WaitForSeconds(speed);
                 typeChar();
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             transform.localScale = Vector3.zero;
             textbox.text = "";
         }
