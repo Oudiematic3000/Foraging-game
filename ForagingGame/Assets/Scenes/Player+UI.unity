@@ -3800,7 +3800,7 @@ MonoBehaviour:
   text:
   - Oi!
   - Over here!
-  speed: 0.05
+  speed: 0.03
   audioManager: {fileID: 0}
 --- !u!114 &1505307732
 MonoBehaviour:
