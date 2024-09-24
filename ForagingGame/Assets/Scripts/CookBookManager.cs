@@ -16,6 +16,7 @@ public class CookBookManager : MonoBehaviour
 
     Dropdown dropdown;
     public GameObject elementDisplay, ingredientButton;
+    public Ingredient dragIngredient;
 
     public delegate void clickDelegate(System.Action<Ingredient> callback);
     public static event clickDelegate waitForIngredient;
