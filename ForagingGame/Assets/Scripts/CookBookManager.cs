@@ -14,7 +14,8 @@ public class CookBookManager : MonoBehaviour
     public TextMeshProUGUI Element2;
     public TextMeshProUGUI Element3;
 
-    Dropdown dropdown;
+    
+    public TMP_Dropdown dropdown;
     public GameObject elementDisplay, ingredientButton;
     public Ingredient dragIngredient;
 
@@ -25,26 +26,27 @@ public class CookBookManager : MonoBehaviour
 
     private void Start()
     {
-        displayRecipe("Steak and Chips");
+        AddRecipe("Steak and Chips");
+        dropdown.captionText.text = "Steak and Chips";
+       displayRecipe();
     }
 
     public void AddRecipe(string recipeName)
     {
-        List<string> newRecipe = new List<string>(1)
-        {
-            recipeName
-        };
-        dropdown.AddOptions(newRecipe);
+       
+        dropdown.options.Add(new TMP_Dropdown.OptionData() { text=recipeName});
     }
 
-    public void displayRecipe(string recipeName)
+    public void displayRecipe()
     {
-        Recipe displayedRecipe = Resources.Load<Recipe>("Recipes/" + recipeName);
+        Debug.Log(dropdown.captionText.text);
+        Recipe displayedRecipe = Resources.Load<Recipe>("Recipes/" + dropdown.captionText.text);
+        Debug.Log(displayedRecipe);
         int i = 1;
         
         foreach(Element e in displayedRecipe.elements)
         {
-          var newElem= Instantiate(elementDisplay, GameObject.Find("Content").transform.position + new Vector3(0,159-(i*331),0),Quaternion.identity,GameObject.Find("Content").transform);
+          var newElem= Instantiate(elementDisplay, GameObject.Find("Content").transform.position + new Vector3(0, 159-(i*331),0),Quaternion.identity,GameObject.Find("Content").transform);
             int j = 0;
             foreach (Ingredient ing in e.elementIngredients)
             {
@@ -54,6 +56,8 @@ public class CookBookManager : MonoBehaviour
             i++;
         }
     }
+
+    
 
    
 }

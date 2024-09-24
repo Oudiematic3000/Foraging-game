@@ -637,7 +637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option C
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -908,10 +908,12 @@ MonoBehaviour:
   Element1: {fileID: 0}
   Element2: {fileID: 0}
   Element3: {fileID: 0}
+  dropdown: {fileID: 1696934186}
   elementDisplay: {fileID: 7165045267738037895, guid: 881de35241213044d9781ff0d179af3e,
     type: 3}
   ingredientButton: {fileID: 1767473863316512810, guid: 748df8ec71e7d054a9012aa399359fbb,
     type: 3}
+  dragIngredient: {fileID: 0}
   waiting: 0
 --- !u!114 &470231315
 MonoBehaviour:
@@ -1954,7 +1956,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1074391162}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99997616
+  m_Size: 0.9999905
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3253,12 +3255,22 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 470231314}
+        m_TargetAssemblyTypeName: CookBookManager, Assembly-CSharp
+        m_MethodName: displayRecipe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1696934187
 MonoBehaviour:
@@ -3622,7 +3634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00064265705}
+  m_AnchoredPosition: {x: 0, y: -0.000024038838}
   m_SizeDelta: {x: 0, y: 856.18}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1988633501
