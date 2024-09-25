@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
-public class InvItem : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, IEndDragHandler
+public class InvItem : MonoBehaviour, IPointerEnterHandler
 {
     public Ingredient ingredient;
     public int quantity;
@@ -45,32 +45,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, I
         displayInfo();
     }
 
-    public void OnBeginDrag(PointerEventData pointerEventData)
-    {
-        CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
-        cookbook.dragIngredient=ingredient;
-        Debug.Log(cookbook.dragIngredient);
-    }
-    
-    public void OnEndDrag(PointerEventData pointerEventData)
-    {
-        CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
-        Ray ray=new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit))
-        {
-            if (!hit.collider.GetComponent<IngredientSlot>())
-            {
-                InventoryManager inventory= GameObject.FindAnyObjectByType<InventoryManager>();
-                inventory.AddInventory(cookbook.dragIngredient);
-            }
-        }
-        else
-        {
-            InventoryManager inventory = GameObject.FindAnyObjectByType<InventoryManager>();
-            inventory.AddInventory(cookbook.dragIngredient);
-        }
-    }
+   
 
 
     public void RefreshCount()

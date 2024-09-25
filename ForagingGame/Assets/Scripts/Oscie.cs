@@ -8,6 +8,8 @@ public class Oscie : MonoBehaviour
     public GameObject[] tools;
     public static event Action<string[]> sendDialogText;
     public string[] osciePickupDialogue;
+    public string[] spokenDialogue;
+    public string[] testDialog;
     private void Awake()
     {
         Dialogue.typeChar += speak;
@@ -30,7 +32,7 @@ public class Oscie : MonoBehaviour
     {
         if (g.GetComponent<Oscie>())
         {
-            sendDialogText(osciePickupDialogue);
+            sendDialogText(spokenDialogue);
         }
     }
     public void speak()

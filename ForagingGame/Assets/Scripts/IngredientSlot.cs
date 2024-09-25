@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class IngredientSlot : MonoBehaviour
+public class IngredientSlot : MonoBehaviour, IPointerClickHandler
 {
     public TextMeshProUGUI typeText;
-    public Image ingredientImage;
     public Ingredient correctIngredient;
     public Ingredient guessIngredient;
     public State state=State.unvalidated;
     public CookBookManager cookBookManager;
+    public bool occupied=false;
     public enum State
     {
         correct,
@@ -23,31 +24,41 @@ public class IngredientSlot : MonoBehaviour
     void Start()
     {
         checkGuess();
+        cookBookManager = FindAnyObjectByType<CookBookManager>();
     }
 
-    private void OnMouseOver()
+    void Update()
     {
-        if(Input.GetMouseButtonUp(0))
+
+        
+    }
+    private void OnTransformChildrenChanged()
+    {
+        clearGuess();
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!occupied)
         {
-            setGuess(cookBookManager.dragIngredient);
+            if (cookBookManager.itemHolder.transform.GetChild(0))
+            {
+                cookBookManager.itemHolder.transform.GetChild(0).transform.SetParent(transform, false);
+                guessIngredient = transform.GetChild(1).GetComponent<InvItem>().ingredient;
+                typeText.transform.localScale = Vector3.zero;
+                occupied = true;
+            }
         }
-    }
-
-    public void setGuess(Ingredient ingredientGuess)
-    {
-        guessIngredient = ingredientGuess;
-        ingredientImage.sprite=ingredientGuess.sprite;
-        ingredientImage.transform.localScale = Vector3.one;
-        typeText.transform.localScale = Vector3.zero;
+       
        
     }
+  
+    
 
     public void clearGuess()
     {
         guessIngredient = null;
-        ingredientImage.sprite=null;
-        ingredientImage.transform.localScale=Vector3.zero;
-        typeText.transform.localScale=-Vector3.one;
+        typeText.transform.localScale=Vector3.one;
+        
     }
 
     public void checkGuess()

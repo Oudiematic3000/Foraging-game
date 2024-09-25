@@ -32,8 +32,8 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            speed = 0.0001f;
-            waitTime = 0.01f;
+            speed = 0.0000000001f;
+            waitTime = 0f;
         }
         else
         {

@@ -884,6 +884,7 @@ RectTransform:
   m_Children:
   - {fileID: 1696934185}
   - {fileID: 1360113328}
+  - {fileID: 617111131}
   m_Father: {fileID: 1988633505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -905,16 +906,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 2081328299}
   recipeName: {fileID: 0}
-  Element1: {fileID: 0}
-  Element2: {fileID: 0}
-  Element3: {fileID: 0}
   dropdown: {fileID: 1696934186}
   elementDisplay: {fileID: 7165045267738037895, guid: 881de35241213044d9781ff0d179af3e,
     type: 3}
   ingredientButton: {fileID: 1767473863316512810, guid: 748df8ec71e7d054a9012aa399359fbb,
     type: 3}
+  itemHolder: {fileID: 617111130}
   dragIngredient: {fileID: 0}
-  waiting: 0
+  holding: 0
 --- !u!114 &470231315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1276,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594223787}
   m_CullTransparentMesh: 1
+--- !u!1 &617111130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617111131}
+  m_Layer: 5
+  m_Name: ItemHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &617111131
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617111130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 470231313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &633646613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +1990,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1074391162}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999905
+  m_Size: 0.9627756
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3634,7 +3668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000024038838}
+  m_AnchoredPosition: {x: 0, y: 1.9285946}
   m_SizeDelta: {x: 0, y: 856.18}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1988633501

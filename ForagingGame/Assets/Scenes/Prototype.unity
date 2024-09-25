@@ -11646,6 +11646,9 @@ MonoBehaviour:
   - Go find some ingredients for a steak and chips.
   - Open your notebook by pressing TAB
   - Whatever the fuck that means.
+  spokenDialogue:
+  - Fuckoff
+  testDialog: []
 --- !u!82 &1497804296
 AudioSource:
   m_ObjectHideFlags: 0

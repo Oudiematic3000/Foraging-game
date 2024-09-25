@@ -319,9 +319,11 @@ public class FirstPersonControls : MonoBehaviour
                 pickedUp(hit.collider.gameObject);
             }else if (hit.collider.GetComponent<Oscie>())
             {
-                pickedUp(hit.collider.gameObject);
-                StartCoroutine(waitForDialogue(hit));
-                
+                if (!dialogUI.GetComponent<Dialogue>().isTalking)
+                {
+                    pickedUp(hit.collider.gameObject);
+                    StartCoroutine(waitForDialogue(hit));
+                }
                 
                 
 
