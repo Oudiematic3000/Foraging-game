@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
-public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
+public class InvItem : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, IEndDragHandler
 {
     public Ingredient ingredient;
     public int quantity;
@@ -14,7 +16,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     public bool selected = false;
     public Image itemSprite;
     public bool waitingSelection=false;
-    public System.Action<Ingredient> callback;
+    public event Action<GameObject> itemClicked;
     void Start()
     {
         RefreshCount();
@@ -27,12 +29,9 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     }
     void OnEnable()
     {
-        CookBookManager.waitForIngredient += waitForIngredient;
+        
     }
-    public void waitForIngredient(System.Action<Ingredient> callback)
-    {
-        this.callback=callback;
-    }
+    
 
     public void SetUp(Ingredient item) 
     {
@@ -46,14 +45,31 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
         displayInfo();
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
+    public void OnBeginDrag(PointerEventData pointerEventData)
     {
         CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
-        if(callback!=null && cookbook.waiting)
+        cookbook.dragIngredient=ingredient;
+        Debug.Log(cookbook.dragIngredient);
+    }
+    
+    public void OnEndDrag(PointerEventData pointerEventData)
+    {
+        CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
+        Ray ray=new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit))
         {
-            callback.Invoke(ingredient);
+            if (!hit.collider.GetComponent<IngredientSlot>())
+            {
+                InventoryManager inventory= GameObject.FindAnyObjectByType<InventoryManager>();
+                inventory.AddInventory(cookbook.dragIngredient);
+            }
         }
-        
+        else
+        {
+            InventoryManager inventory = GameObject.FindAnyObjectByType<InventoryManager>();
+            inventory.AddInventory(cookbook.dragIngredient);
+        }
     }
 
 

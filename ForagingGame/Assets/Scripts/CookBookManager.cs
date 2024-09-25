@@ -10,17 +10,12 @@ public class CookBookManager : MonoBehaviour
     public GameObject inventory;
 
     public TextMeshProUGUI recipeName;
-    public TextMeshProUGUI Element1;
-    public TextMeshProUGUI Element2;
-    public TextMeshProUGUI Element3;
-
-    
+   
     public TMP_Dropdown dropdown;
     public GameObject elementDisplay, ingredientButton;
     public Ingredient dragIngredient;
 
-    public delegate void clickDelegate(System.Action<Ingredient> callback);
-    public static event clickDelegate waitForIngredient;
+   
     public bool waiting;
 
 
