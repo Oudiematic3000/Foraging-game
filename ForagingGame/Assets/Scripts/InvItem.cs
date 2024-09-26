@@ -10,27 +10,15 @@ using Unity.VisualScripting;
 public class InvItem : MonoBehaviour, IPointerEnterHandler
 {
     public Ingredient ingredient;
-    public int quantity;
     public TextMeshProUGUI itemText;
     public int itemCount = 1;
-    public bool selected = false;
     public Image itemSprite;
-    public bool waitingSelection=false;
-    public event Action<GameObject> itemClicked;
     void Start()
     {
         RefreshCount();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void OnEnable()
-    {
-        
-    }
+
     
 
     public void SetUp(Ingredient item) 
@@ -53,8 +41,12 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
         itemText.text = itemCount.ToString();
         bool textActive = itemCount > 1;
         itemText.gameObject.SetActive(textActive);
+        if (itemCount < 1) Destroy(gameObject);
     }
-
+    public void RemoveItem()
+    {
+        itemCount--;
+    }
     public void displayInfo()
     {
         TextMeshProUGUI descriptionPane = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();

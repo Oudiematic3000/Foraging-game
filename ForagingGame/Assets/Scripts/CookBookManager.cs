@@ -13,9 +13,9 @@ public class CookBookManager : MonoBehaviour
     public TextMeshProUGUI recipeName;
    
     public TMP_Dropdown dropdown;
-    public GameObject elementDisplay, ingredientButton, itemHolder;
+    public GameObject elementDisplay, ingredientButton, itemHolder, target;
     public Ingredient dragIngredient;
-
+    GraphicRaycaster gr;
 
     public bool holding;
 
@@ -25,6 +25,7 @@ public class CookBookManager : MonoBehaviour
         AddRecipe("Steak and Chips");
         dropdown.captionText.text = "Steak and Chips";
         displayRecipe();
+        gr = FindAnyObjectByType<Canvas>().GetComponent<GraphicRaycaster>();
     }
 
     public void Update()
@@ -33,16 +34,26 @@ public class CookBookManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             PointerEventData ptr = new PointerEventData(EventSystem.current);
-            ptr.position = Camera.main.ScreenToWorldPoint( Input.mousePosition);
-            GraphicRaycaster gr = FindAnyObjectByType<Canvas>().GetComponent<GraphicRaycaster>();
+            ptr.position =Input.mousePosition;
+            
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(ptr, results);
-          //  Debug.Log(results[0]);
-            if (results[0].gameObject.GetComponent<InvItem>())
+            
+            foreach(RaycastResult result in results )
             {
-                results[0].gameObject.transform.SetParent(itemHolder.transform,false);
-                
+                Debug.Log(result.gameObject.name);
+                if(result.gameObject.GetComponent<InvItem>()) target=result.gameObject;
             }
+            if (target)
+            {
+                
+              GameObject heldItem=  Instantiate(target, itemHolder.transform);
+                target.GetComponent<InvItem>().RemoveItem();
+                target.GetComponent<InvItem>().RefreshCount();
+                heldItem.GetComponent<InvItem>().itemCount = 1;
+                heldItem.GetComponent<InvItem>().RefreshCount();
+            }
+            target = null;
         }
     }
 

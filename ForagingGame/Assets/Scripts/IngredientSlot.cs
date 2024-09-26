@@ -34,6 +34,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     }
     private void OnTransformChildrenChanged()
     {
+        if(transform.childCount==1)
         clearGuess();
     }
     public void OnPointerClick(PointerEventData eventData)
@@ -42,10 +43,11 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         {
             if (cookBookManager.itemHolder.transform.GetChild(0))
             {
+                occupied = true;
                 cookBookManager.itemHolder.transform.GetChild(0).transform.SetParent(transform, false);
                 guessIngredient = transform.GetChild(1).GetComponent<InvItem>().ingredient;
                 typeText.transform.localScale = Vector3.zero;
-                occupied = true;
+                
             }
         }
        
@@ -58,9 +60,15 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     {
         guessIngredient = null;
         typeText.transform.localScale=Vector3.one;
+        StartCoroutine(delay());
         
     }
 
+    public IEnumerator delay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        occupied = false;
+    }
     public void checkGuess()
     {
         if(guessIngredient==correctIngredient)
