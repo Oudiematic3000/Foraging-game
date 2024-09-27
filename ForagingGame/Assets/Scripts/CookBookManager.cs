@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,8 +17,8 @@ public class CookBookManager : MonoBehaviour
     public GameObject elementDisplay, ingredientButton, itemHolder, target;
     public Ingredient dragIngredient;
     GraphicRaycaster gr;
-
-    public bool holding;
+    public static event Action startCook;
+    
 
 
     private void Start()
@@ -41,10 +42,9 @@ public class CookBookManager : MonoBehaviour
             
             foreach(RaycastResult result in results )
             {
-                Debug.Log(result.gameObject.name);
                 if(result.gameObject.GetComponent<InvItem>()) target=result.gameObject;
             }
-            if (target)
+            if (target && itemHolder.transform.childCount==0)
             {
                 
               GameObject heldItem=  Instantiate(target, itemHolder.transform);
@@ -52,9 +52,31 @@ public class CookBookManager : MonoBehaviour
                 target.GetComponent<InvItem>().RefreshCount();
                 heldItem.GetComponent<InvItem>().itemCount = 1;
                 heldItem.GetComponent<InvItem>().RefreshCount();
+            }else if (target)
+            {
+                Ingredient held = itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
+                inventory.GetComponent<InventoryManager>().AddInventory(held);
+                Destroy(itemHolder.transform.GetChild(0).gameObject);
+
+                GameObject heldItem = Instantiate(target, itemHolder.transform);
+                target.GetComponent<InvItem>().RemoveItem();
+                target.GetComponent<InvItem>().RefreshCount();
+                heldItem.GetComponent<InvItem>().itemCount = 1;
+                heldItem.GetComponent<InvItem>().RefreshCount();
             }
             target = null;
         }
+        if(Input.GetMouseButtonDown(1) && itemHolder.transform.childCount>0) {
+        
+            Ingredient held =itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
+            inventory.GetComponent<InventoryManager>().AddInventory(held);
+            Destroy(itemHolder.transform.GetChild(0).gameObject);
+        }
+    }
+
+    public void startCookFunc()
+    {
+        startCook();
     }
 
     public void AddRecipe(string recipeName)
@@ -77,7 +99,8 @@ public class CookBookManager : MonoBehaviour
             int j = 0;
             foreach (Ingredient ing in e.elementIngredients)
             {
-                Instantiate(ingredientButton, newElem.transform.position+new Vector3(-450+(j*100), 0, 0), Quaternion.identity, newElem.transform);
+                var newSlot = Instantiate(ingredientButton, newElem.transform.position+new Vector3(-450+(j*100), 0, 0), Quaternion.identity, newElem.transform);
+                newSlot.GetComponent<IngredientSlot>().Setup(ing);
                 j++;
             }
             i++;

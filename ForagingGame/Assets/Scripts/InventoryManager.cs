@@ -62,9 +62,13 @@ public class InventoryManager : MonoBehaviour
         if (isDuplicate == false)
         {
             invItem.SetUp(item);
-            this.transform.localScale = Vector3.one;
-            Instantiate(invItem, FindSlot().transform.position, Quaternion.identity, FindSlot().transform);
-            this.transform.localScale = Vector3.zero;
+            if (transform.localScale != Vector3.zero) { Instantiate(invItem, FindSlot().transform.position, Quaternion.identity, FindSlot().transform); }
+            else
+            {
+                this.transform.localScale = Vector3.one;
+                Instantiate(invItem, FindSlot().transform.position, Quaternion.identity, FindSlot().transform);
+                this.transform.localScale = Vector3.zero;
+            }
         }
     }
     private GameObject FindSlot()

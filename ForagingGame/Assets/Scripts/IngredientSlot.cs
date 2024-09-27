@@ -21,10 +21,20 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         wrong,
         unvalidated
     }
+    void Awake()
+    {
+        CookBookManager.startCook += checkGuess;
+    }
     void Start()
     {
-        checkGuess();
+        
         cookBookManager = FindAnyObjectByType<CookBookManager>();
+
+    }
+    public void Setup(Ingredient ci)
+    {
+        correctIngredient = ci;
+        typeText.text = ci.ingredientType.ToString();
     }
 
     void Update()
