@@ -15,7 +15,8 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     public State state=State.unvalidated;
     public CookBookManager cookBookManager;
     public bool occupied=false;
-    public static event Action childChanged;  
+    public static event Action childChanged;
+    public static event Action<Ingredient> slotIngChanged;
     public enum State
     {
         correct,
@@ -33,11 +34,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         cookBookManager = FindAnyObjectByType<CookBookManager>();
 
     }
-    public void Setup(Ingredient ci)
-    {
-        correctIngredient = ci;
-        typeText.text = ci.ingredientType.ToString();
-    }
+
 
     void Update()
     {
@@ -47,6 +44,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     private void OnTransformChildrenChanged()
     {
         childChanged();
+        slotIngChanged(transform.GetComponentInChildren<InvItem>().ingredient);
         if(transform.childCount==1)
         Destroy(gameObject);
     }
@@ -60,14 +58,14 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
                 cookBookManager.itemHolder.transform.GetChild(0).transform.SetParent(transform, false);
                 guessIngredient = transform.GetChild(1).GetComponent<InvItem>().ingredient;
                 typeText.transform.localScale = Vector3.zero;
-                
+
             }
         }
-       
-       
+
+
     }
-  
-    
+
+
 
     public void clearGuess()
     {
