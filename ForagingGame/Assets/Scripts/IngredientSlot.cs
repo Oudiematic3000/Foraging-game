@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     public State state=State.unvalidated;
     public CookBookManager cookBookManager;
     public bool occupied=false;
+    public static event Action childChanged;  
     public enum State
     {
         correct,
@@ -44,8 +46,9 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     }
     private void OnTransformChildrenChanged()
     {
+        childChanged();
         if(transform.childCount==1)
-        clearGuess();
+        Destroy(gameObject);
     }
     public void OnPointerClick(PointerEventData eventData)
     {

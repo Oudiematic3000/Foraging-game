@@ -14,7 +14,7 @@ public class CookBookManager : MonoBehaviour
     public TextMeshProUGUI recipeName;
    
     public TMP_Dropdown dropdown;
-    public GameObject elementDisplay, ingredientButton, itemHolder, target;
+    public GameObject elementDisplay,  itemHolder, target;
     public Ingredient dragIngredient;
     GraphicRaycaster gr;
     public static event Action startCook;
@@ -96,13 +96,13 @@ public class CookBookManager : MonoBehaviour
         foreach(Element e in displayedRecipe.elements)
         {
           var newElem= Instantiate(elementDisplay, GameObject.Find("Content").transform.position + new Vector3(0, 159-(i*331),0),Quaternion.identity,GameObject.Find("Content").transform);
-            int j = 0;
+            ElementSlot newElemScript = newElem.GetComponent<ElementSlot>();
+
             foreach (Ingredient ing in e.elementIngredients)
             {
-                var newSlot = Instantiate(ingredientButton, newElem.transform.position+new Vector3(-450+(j*100), 0, 0), Quaternion.identity, newElem.transform);
-                newSlot.GetComponent<IngredientSlot>().Setup(ing);
-                j++;
+                newElemScript.Setup(ing);
             }
+            newElemScript.displayAdded();
             i++;
         }
     }
