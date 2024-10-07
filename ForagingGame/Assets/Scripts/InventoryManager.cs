@@ -11,7 +11,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject[] slots;
      public InvItem invItem;
     public bool isOpen=false;
-
+    public Sprite openSprite;
+    public GameObject cookSprite;
     public static InventoryManager instance;
     void Awake()
     {
@@ -42,6 +43,17 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Cursor.visible = true;
+        }
+
+        if (FindAnyObjectByType<CookBookManager>().isOpen)
+        {
+            cookSprite.SetActive(true);
+            GetComponent<Image>().enabled=false;
+        }
+        else
+        {
+            GetComponent<Image>().enabled=true;
+            cookSprite.SetActive(false);
         }
 
     }

@@ -18,7 +18,7 @@ public class CookBookManager : MonoBehaviour
     public Ingredient dragIngredient;
     GraphicRaycaster gr;
     public static event Action startCook;
-    
+    public bool isOpen=false;
 
 
     private void Start()
@@ -31,6 +31,7 @@ public class CookBookManager : MonoBehaviour
 
     public void Update()
     {
+
         itemHolder.transform.position=Input.mousePosition+new Vector3(75,-75,0);
         if (Input.GetMouseButtonDown(0))
         {

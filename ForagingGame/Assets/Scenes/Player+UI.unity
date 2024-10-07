@@ -912,6 +912,7 @@ MonoBehaviour:
   itemHolder: {fileID: 617111130}
   target: {fileID: 0}
   dragIngredient: {fileID: 0}
+  isOpen: 0
 --- !u!114 &470231315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4031,7 +4032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00020695757}
+  m_AnchoredPosition: {x: 0, y: 0.00052638334}
   m_SizeDelta: {x: 0, y: 856.18}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1988633501
@@ -4130,9 +4131,9 @@ RectTransform:
   m_Children:
   - {fileID: 1889018967}
   - {fileID: 1549210025}
-  - {fileID: 2081328303}
   - {fileID: 617111131}
   - {fileID: 470231313}
+  - {fileID: 2081328303}
   - {fileID: 1505307730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.277, y: 0, z: 0}
@@ -4454,6 +4455,8 @@ MonoBehaviour:
   - {fileID: 396086437}
   invItem: {fileID: 1611588331214424967, guid: 39df4f0381a5d324ab4b7b254e31aa04, type: 3}
   isOpen: 0
+  openSprite: {fileID: 21300000, guid: da43a29e443434f4fb2d7a52ce404b37, type: 3}
+  cookSprite: {fileID: 0}
 --- !u!114 &2081328301
 MonoBehaviour:
   m_ObjectHideFlags: 0

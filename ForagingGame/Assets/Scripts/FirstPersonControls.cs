@@ -399,6 +399,7 @@ public class FirstPersonControls : MonoBehaviour
         {
             cookbookUI.transform.localScale = Vector3.zero;
             inventory.isOpen = false;
+            cookbookUI.GetComponent<CookBookManager>().isOpen = false;
         }
     }
             public void Crouch()
