@@ -909,8 +909,6 @@ MonoBehaviour:
   dropdown: {fileID: 1696934186}
   elementDisplay: {fileID: 7165045267738037895, guid: 881de35241213044d9781ff0d179af3e,
     type: 3}
-  ingredientButton: {fileID: 1767473863316512810, guid: 748df8ec71e7d054a9012aa399359fbb,
-    type: 3}
   itemHolder: {fileID: 617111130}
   target: {fileID: 0}
   dragIngredient: {fileID: 0}
@@ -2113,7 +2111,7 @@ Transform:
   m_GameObject: {fileID: 1198292128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 25.24, y: 67.92, z: 103.24}
+  m_LocalPosition: {x: 101.12, y: 20.07, z: 149.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
