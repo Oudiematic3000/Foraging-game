@@ -7,9 +7,10 @@ public class Pot : MonoBehaviour
     public GameObject cookbookUI;
     public InventoryManager inventory;
 
-    private void Awake()
+    private void Start()
     {
         inventory = FindAnyObjectByType<InventoryManager>();
+        cookbookUI = FindAnyObjectByType<CookBookManager>().gameObject;
     }
     public void ToggleCookbook()
     {

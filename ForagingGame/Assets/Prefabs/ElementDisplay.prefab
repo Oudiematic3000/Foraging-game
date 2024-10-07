@@ -202,8 +202,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1x Protein
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b4b960720e05762429bb44661aea1979, type: 2}
+  m_sharedMaterial: {fileID: 7024315249634964122, guid: b4b960720e05762429bb44661aea1979,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -325,8 +326,10 @@ MonoBehaviour:
   guessIngredients: []
   correctTypes: []
   guessTypes: []
-  added: []
+  wrongFlavs: []
+  missFlavs: []
   toAddList: {fileID: 7914362956313959950}
+  ElementTitle: {fileID: 2947929127524640951}
   cookBookManager: {fileID: 0}
   ingredientSlot: {fileID: 1767473863316512810, guid: 748df8ec71e7d054a9012aa399359fbb,
     type: 3}
@@ -398,8 +401,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Element Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b4b960720e05762429bb44661aea1979, type: 2}
+  m_sharedMaterial: {fileID: 7024315249634964122, guid: b4b960720e05762429bb44661aea1979,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

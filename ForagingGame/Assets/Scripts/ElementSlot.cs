@@ -17,6 +17,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
 
 
     public TextMeshProUGUI toAddList;
+    public TextMeshProUGUI ElementTitle;
 
     public CookBookManager cookBookManager;
     public GameObject ingredientSlot, grid;
@@ -25,6 +26,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
     {
           IngredientSlot.childChanged += displayAdded;
         IngredientSlot.slotIngChanged += RemoveGuess;
+        CookBookManager.startCook += CheckGuess;
     }
     void Start()
     {

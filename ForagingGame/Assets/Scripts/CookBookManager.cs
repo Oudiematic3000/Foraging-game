@@ -97,7 +97,7 @@ public class CookBookManager : MonoBehaviour
         {
           var newElem= Instantiate(elementDisplay, GameObject.Find("Content").transform.position + new Vector3(0, 159-(i*331),0),Quaternion.identity,GameObject.Find("Content").transform);
             ElementSlot newElemScript = newElem.GetComponent<ElementSlot>();
-
+            newElemScript.ElementTitle.text=e.elementName;
             foreach (Ingredient ing in e.elementIngredients)
             {
                 newElemScript.Setup(ing);
