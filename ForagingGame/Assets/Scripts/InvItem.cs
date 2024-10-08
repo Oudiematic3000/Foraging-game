@@ -19,7 +19,17 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    
+    void Update()
+    {
+        if (FindAnyObjectByType<CookBookManager>().isOpen)
+        {
+            itemText.color = Color.white;
+        }
+        else
+        {
+            itemText.color = Color.black;
+        }
+    }
 
     public void SetUp(Ingredient item) 
     {

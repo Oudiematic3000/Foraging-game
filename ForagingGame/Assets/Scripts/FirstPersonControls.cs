@@ -337,6 +337,7 @@ public class FirstPersonControls : MonoBehaviour
                 hit.collider.GetComponent<Door>().changeScene();
             }else if (hit.collider.GetComponent<Pot>())
             {
+                hit.collider.GetComponent<Pot>().cookbookUI = GameObject.Find("Cookbook");
                 hit.collider.GetComponent<Pot>().ToggleCookbook();
             }
            

@@ -9,12 +9,12 @@ public class Pot : MonoBehaviour
 
     private void Start()
     {
-        inventory = FindAnyObjectByType<InventoryManager>();
-        cookbookUI = FindAnyObjectByType<CookBookManager>().gameObject;
+       
+        
     }
     public void ToggleCookbook()
     {
-
+        inventory = FindAnyObjectByType<InventoryManager>();
         if (cookbookUI.transform.localScale == Vector3.one)
         {
             cookbookUI.transform.localScale = Vector3.zero;

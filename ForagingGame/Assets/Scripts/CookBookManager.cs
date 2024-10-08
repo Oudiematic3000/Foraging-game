@@ -18,6 +18,7 @@ public class CookBookManager : MonoBehaviour
     public Ingredient dragIngredient;
     GraphicRaycaster gr;
     public static event Action startCook;
+    public static event Action SendFeedback;
     public bool isOpen=false;
 
 
@@ -78,6 +79,7 @@ public class CookBookManager : MonoBehaviour
     public void startCookFunc()
     {
         startCook();
+        SendFeedback();
     }
 
     public void AddRecipe(string recipeName)

@@ -13,7 +13,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
     public List<string> correctTypes;
     public List<string> guessTypes;
     [SerializeField]
-    private List<string> wrongFlavs, missFlavs;
+    public List<string> wrongFlavs, missFlavs;
 
 
     public TextMeshProUGUI toAddList;
