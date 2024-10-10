@@ -66,6 +66,7 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
     public GameObject dialogUI;
+    public GameObject itemHolder;
 
 
     public static FirstPersonControls instance;
@@ -104,8 +105,6 @@ public class FirstPersonControls : MonoBehaviour
         //Subscribe to the pick-up input event
         playerInput.Player.ToggleInventory.performed += ctx => ToggleInventory(); // Call the PickUpObject method when pick-up input is performed
 
-        playerInput.Player.ToggleCookbook.performed += ctx => ToggleCookbook(); // Call the PickUpObject method when pick-up input is performed
-
         // Subscribe to the SwitchTool input events
         playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
         playerInput.Player.SwitchTool.performed += ctx => SwitchTool();
@@ -113,8 +112,11 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the crouch input event
         playerInput.Player.Crouch.performed += ctx => Crouch(); // Call the PickUpObject method when pick-up input is performed
 
+        playerInput.Player.Taste.performed += ctx => Taste();
 
     }
+
+    
 
     private void Update()
     {
@@ -330,7 +332,7 @@ public class FirstPersonControls : MonoBehaviour
             }
             else if (hit.collider.GetComponent<Obstacle>())
             {
-                if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded)Destroy(hit.collider.gameObject);
+                if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded) hit.collider.GetComponent<Obstacle>().PlayDeath();
               
             }else if (hit.collider.GetComponent<Door>())
             {
@@ -394,16 +396,8 @@ public class FirstPersonControls : MonoBehaviour
         Destroy(hit.gameObject);
     }
 
-    public void ToggleCookbook()
-    {
-        if (cookbookUI.transform.localScale == Vector3.one)
-        {
-            cookbookUI.transform.localScale = Vector3.zero;
-            inventory.isOpen = false;
-            cookbookUI.GetComponent<CookBookManager>().isOpen = false;
-        }
-    }
-            public void Crouch()
+    
+    public void Crouch()
     {
         if (isCrouching)
         {
@@ -423,21 +417,44 @@ public class FirstPersonControls : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if(inventoryUI.transform.localScale == Vector3.one)
+        if (cookbookUI.transform.localScale == Vector3.zero)
         {
-            inventoryUI.transform.localScale = Vector3.zero;
-            inventory.isOpen=false;
+            if (inventoryUI.transform.localScale == Vector3.one)
+            {
+                inventoryUI.transform.localScale = Vector3.zero;
+                inventory.isOpen = false;
+            }
+            else if (inventoryUI.transform.localScale == Vector3.zero)
+            {
+                inventoryUI.transform.localScale = Vector3.one;
+                inventory.isOpen = true;
+            }
         }
-        else if(inventoryUI.transform.localScale == Vector3.zero) {
-            inventoryUI.transform.localScale = Vector3.one;
-            inventory.isOpen=true;
+        else
+        {
+            cookbookUI.transform.localScale=Vector3.zero;
+            cookbookUI.GetComponent<CookBookManager>().isOpen=false;
+            inventoryUI.transform.localScale = Vector3.zero;
+            inventory.isOpen = false;
         }
     }
 
-    
+
+    private void Taste()
+    {
+        if (itemHolder.GetComponentInChildren<InvItem>())
+        {
+            Ingredient tasteIng = itemHolder.GetComponentInChildren<InvItem>().ingredient;
+            if (tasteIng.unrevealedFlavours.Count != 0)
+            {
+                tasteIng.tasteIngredient();
+                itemHolder.GetComponentInChildren<InvItem>().displayInfo();
+                itemHolder.GetComponentInChildren<InvItem>().RemoveItem();
+            }
+        }
+    }
 
 
 
-    
 
 }

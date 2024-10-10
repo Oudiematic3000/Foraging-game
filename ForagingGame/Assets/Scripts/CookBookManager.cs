@@ -19,6 +19,7 @@ public class CookBookManager : MonoBehaviour
     GraphicRaycaster gr;
     public static event Action startCook;
     public static event Action SendFeedback;
+    public static event Action ConsumeIngredients;
     public bool isOpen=false;
 
 
@@ -28,6 +29,7 @@ public class CookBookManager : MonoBehaviour
         dropdown.captionText.text = "Steak and Chips";
         displayRecipe();
         gr = FindAnyObjectByType<Canvas>().GetComponent<GraphicRaycaster>();
+        transform.localScale= Vector3.zero;
     }
 
     public void Update()
@@ -80,6 +82,7 @@ public class CookBookManager : MonoBehaviour
     {
         startCook();
         SendFeedback();
+        ConsumeIngredients();
     }
 
     public void AddRecipe(string recipeName)

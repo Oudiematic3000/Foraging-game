@@ -27,7 +27,7 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
         childChanged();
         if (transform.childCount == 1)
         {
-            slotIngChanged(cookBookManager.itemHolder.GetComponentInChildren<InvItem>().ingredient);
+           if(cookBookManager.itemHolder.transform.childCount>0) slotIngChanged(cookBookManager.itemHolder.GetComponentInChildren<InvItem>().ingredient);
             Destroy(gameObject);
         }
     }

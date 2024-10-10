@@ -56,6 +56,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler
     public void RemoveItem()
     {
         itemCount--;
+        RefreshCount();
     }
     public void displayInfo()
     {

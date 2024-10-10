@@ -78,9 +78,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleCookbook",
+                    "name": "Taste",
                     "type": "Button",
-                    "id": "060635d7-076f-4c52-a371-284de0b5c234",
+                    "id": "1511043a-b6a5-480d-930d-9b4d59e055e4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -365,12 +365,23 @@
                 },
                 {
                     "name": "",
-                    "id": "4c5268eb-f131-4c58-be87-21850cb7081e",
+                    "id": "d41b5d16-d902-40bd-9f63-91aeb4c2ecbc",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "ToggleCookbook",
+                    "action": "ToggleInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c180194a-c95f-4c30-b756-30ba0810bdcf",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Taste",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

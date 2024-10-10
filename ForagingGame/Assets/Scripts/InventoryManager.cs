@@ -49,12 +49,14 @@ public class InventoryManager : MonoBehaviour
         if (FindAnyObjectByType<CookBookManager>().isOpen)
         {
             cookSprite.SetActive(true);
+            GameObject.Find("FeedbackButton").transform.localScale = Vector3.zero;
             GetComponent<Image>().enabled=false;
             GameObject.Find("Description").GetComponent<TextMeshProUGUI>().color = Color.white;
         }
         else
         {
             GetComponent<Image>().enabled=true;
+            GameObject.Find("FeedbackButton").transform.localScale = Vector3.one;
             cookSprite.SetActive(false);
             GameObject.Find("Description").GetComponent<TextMeshProUGUI>().color = Color.black;
         }

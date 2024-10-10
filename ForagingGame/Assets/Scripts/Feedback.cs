@@ -16,7 +16,10 @@ public class Feedback : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(FindAnyObjectByType<CookBookManager>().isOpen)
+        {
+            transform.localScale = Vector3.zero;
+        }
     }
 
     public void toggle()

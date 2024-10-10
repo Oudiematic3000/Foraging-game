@@ -12,6 +12,7 @@ public class NoteRecipe : MonoBehaviour
     {
         dropdown.captionText.text = "Steak and Chips";
         DisplayRecipe();
+        
     }
 
     // Update is called once per frame
@@ -21,9 +22,21 @@ public class NoteRecipe : MonoBehaviour
         {
             transform.localScale = Vector3.zero;
         }
-        else
+        else if(GameObject.FindAnyObjectByType<Feedback>().transform.localScale == Vector3.zero)
         {
             transform .localScale = Vector3.one;
+        }
+    }
+
+    public void Toggle()
+    {
+        if (transform.localScale == Vector3.zero)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else
+        {
+            transform.localScale = Vector3.zero;
         }
     }
 

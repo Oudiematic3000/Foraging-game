@@ -27,6 +27,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
           IngredientSlot.childChanged += displayAdded;
         IngredientSlot.slotIngChanged += RemoveGuess;
         CookBookManager.startCook += CheckGuess;
+        CookBookManager.ConsumeIngredients += consumeIngredients;
     }
     void Start()
     {
@@ -101,7 +102,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
     public void RemoveGuess(Ingredient ing)
     {
         guessIngredients.Remove(ing);
-        displayAdded(); CheckGuess();
+        displayAdded();
     }
 
     public void CheckGuess()
@@ -149,7 +150,18 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
 
     }
 
-   
+   public void consumeIngredients()
+    {
+        foreach(Transform t in grid.transform)
+        {
+            Debug.Log(t);    
+            t.GetComponentInChildren<InvItem>().RemoveItem();
+            //Destroy(t.gameObject);
+        }
+
+        cookBookManager.transform.localScale= Vector3.zero;
+        cookBookManager.isOpen=false;
+    }
 
   
 

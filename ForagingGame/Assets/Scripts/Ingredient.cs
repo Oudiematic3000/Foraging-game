@@ -13,8 +13,14 @@ public class Ingredient : ScriptableObject
     public string ingredientDescription;
     public Tool toolNeeded;
     public Sprite sprite;
-    
+    public List<string> unrevealedFlavours, revealedFlavours;
 
+    private void OnEnable()
+    {
+        unrevealedFlavours.Clear();
+        revealedFlavours.Clear();
+        foreach(string flavour in flavours) unrevealedFlavours.Add(flavour);
+    }
     public enum Tool
     {
         None,
@@ -38,8 +44,21 @@ public class Ingredient : ScriptableObject
         Fat
     }
 
+    public void tasteIngredient()
+    {
+        int rn = Random.Range(0, unrevealedFlavours.Count);
+        revealedFlavours.Add(unrevealedFlavours[rn]);
+        unrevealedFlavours.RemoveAt(rn);
+    }
+
     public string toString()
     {
-        return ingredientName + "\t\t   " +ingredientType+"\n"+ ingredientDescription;
+        string output = ingredientName + " - " + ingredientType + "\t<b>";
+        foreach(string flav in revealedFlavours)
+        {
+            output += "\n" + flav + " flavour...";
+        }
+        output+="</b>\n" + ingredientDescription;
+        return output;
     }
 }

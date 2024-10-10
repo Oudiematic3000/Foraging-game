@@ -15,6 +15,11 @@ public class Oscie : MonoBehaviour
         Dialogue.typeChar += speak;
         FirstPersonControls.pickedUp += getDialog;
     }
+    private void OnDestroy()
+    {
+        Dialogue.typeChar -= speak;
+        FirstPersonControls.pickedUp -= getDialog;
+    }
     void Start()
     {
         foreach (GameObject go in tools)
