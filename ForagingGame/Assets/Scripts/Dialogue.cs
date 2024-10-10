@@ -15,6 +15,9 @@ public class Dialogue : MonoBehaviour
     public float waitTime;
     private float initSpeed;
     private float initWaitTime;
+    public bool skip =false;
+    public bool finish =false;
+    public bool typing = false;
     private void Awake()
     {
         Oscie.sendDialogText += setDialog;
@@ -23,22 +26,24 @@ public class Dialogue : MonoBehaviour
     {
         textbox.text = "";
         gameObject.SetActive(false);
-        initSpeed = speed;
-        initWaitTime = waitTime;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            speed = 0.0000000001f;
-            waitTime = 0f;
+        
+            
+           if(!typing && !finish) finish = true;
+           if (typing && !finish) skip = true;
+
         }
         else
         {
-            speed=initSpeed;
-            waitTime=initWaitTime;
+            
+            finish = false;
         }
 
         
@@ -62,14 +67,33 @@ public class Dialogue : MonoBehaviour
         isTalking = true;
         for (int i = 0; i < text.Length; i++)
         {
+            finish = false;
+            skip = false;
             transform.localScale = Vector3.one*(0.75f);
+            
+            typing = true;
             foreach (char c in text[i].ToCharArray())
             {
-                textbox.text += c;
-                yield return new WaitForSeconds(speed);
-                typeChar();
+                if (!skip)
+                {
+                    textbox.text += c;
+                    yield return new WaitForSeconds(speed);
+                    typeChar();
+                }
+                else
+                {
+                    skip = false;
+                    textbox.text = text[i];
+                    
+                    break;
+                    
+                }
             }
-            yield return new WaitForSeconds(waitTime);
+            typing = false;
+            skip = false;
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitWhile(()=>!finish);
+           
             transform.localScale = Vector3.zero;
             textbox.text = "";
         }

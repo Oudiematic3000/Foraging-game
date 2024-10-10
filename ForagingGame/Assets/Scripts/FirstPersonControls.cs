@@ -46,7 +46,7 @@ public class FirstPersonControls : MonoBehaviour
     public List<Ingredient.Tool> ownedTools;
     private float scrollInput;
     public float pickUpRange = 3f; // Range within which objects can be picked up
-    private bool holdingOscie = false;
+    public bool holdingOscie = false;
     public InventoryManager inventory;
     public static event Action<GameObject> pickedUp;
 
@@ -68,6 +68,10 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject dialogUI;
     public GameObject itemHolder;
 
+    [Header("TUTORIAL SETTINGS")]
+    [Space(5)]
+    public List<string> completedTasks;
+    public List<string> uncompletedTasks;
 
     public static FirstPersonControls instance;
     Controls playerInput;
@@ -419,6 +423,7 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (cookbookUI.transform.localScale == Vector3.zero)
         {
+            
             if (inventoryUI.transform.localScale == Vector3.one)
             {
                 inventoryUI.transform.localScale = Vector3.zero;
@@ -428,6 +433,12 @@ public class FirstPersonControls : MonoBehaviour
             {
                 inventoryUI.transform.localScale = Vector3.one;
                 inventory.isOpen = true;
+                if (holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstTime"))
+                {
+                    completedTasks.Add("OpenNotebookFirstTime");
+                    uncompletedTasks.Remove("OpenNotebookFirstTime");
+                    pickedUp(inventoryUI);
+                }
             }
         }
         else

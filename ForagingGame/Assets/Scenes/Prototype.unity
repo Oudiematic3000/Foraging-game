@@ -12915,6 +12915,13 @@ MonoBehaviour:
   - Go find some ingredients for a steak and chips.
   - Open your notebook by pressing TAB
   - Whatever the fuck that means.
+  notebookFirstTimeDialog:
+  - I've given you the basic outline of a recipe for Steak and Chips.
+  - You can see it on the right there.
+  - Each element of the recipe has a basic structure comprised of certain types of
+    ingredients.
+  - With the structure as a bit of guidance,
+  - it is your job to find ingredients with the right flavours for the dish.
   spokenDialogue:
   - Fuckoff
   testDialog: []
@@ -12974,7 +12981,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.923
       inSlope: 0
       outSlope: 0
       tangentMode: 0
