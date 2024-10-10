@@ -67,6 +67,7 @@ public class Dialogue : MonoBehaviour
         isTalking = true;
         for (int i = 0; i < text.Length; i++)
         {
+            int j = 0;
             finish = false;
             skip = false;
             transform.localScale = Vector3.one*(0.75f);
@@ -78,7 +79,8 @@ public class Dialogue : MonoBehaviour
                 {
                     textbox.text += c;
                     yield return new WaitForSeconds(speed);
-                    typeChar();
+                    if(j%2==0) typeChar();
+                    j++;
                 }
                 else
                 {

@@ -12925,7 +12925,16 @@ MonoBehaviour:
   - This exam will test your ability to sus out exactly WHAT ingredients and flavours
     should be in the dish.
   notebookFirstIngredientDialogue:
-  - Cumdog
+  - Oh look you got something.
+  - You can hover over ingredients in your inventory for some info on them.
+  - and click on them to pick them up.
+  - (Metaphorically speaking.)
+  holdItemFirstTimeDialogue:
+  - Careful where you point that thing.
+  - While holding an Item, press E to taste it.
+  - Doing so will consume the ingredient, but will reveal one of its flavours.
+  - You could try find spare ingredients to taste,
+  - Or you could just throw shit in the pot and figure the rest out later.
   spokenDialogue:
   - Fuckoff
   testDialog: []
@@ -12939,9 +12948,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8cbf40d987aefa84dbabe4f0a794557e, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.627
+  m_audioClip: {fileID: 8300000, guid: 519c9b98c863814408d2a464e5127eac, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.511
   m_Pitch: 1
   Loop: 0
   Mute: 0

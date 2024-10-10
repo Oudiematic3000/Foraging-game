@@ -50,8 +50,8 @@ public class CookBookManager : MonoBehaviour
             }
             if (target && itemHolder.transform.childCount==0)
             {
-                
-              GameObject heldItem=  Instantiate(target, itemHolder.transform);
+                FindAnyObjectByType<FirstPersonControls>().holdItem();
+                    GameObject heldItem=  Instantiate(target, itemHolder.transform);
                 target.GetComponent<InvItem>().RemoveItem();
                 target.GetComponent<InvItem>().RefreshCount();
                 heldItem.GetComponent<InvItem>().itemCount = 1;

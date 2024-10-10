@@ -315,8 +315,16 @@ public class FirstPersonControls : MonoBehaviour
             {
                 ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
                 Destroy(hit.collider.gameObject);
-                
-            }else if (hit.collider.GetComponent<Oscie>())
+                if (uncompletedTasks.Contains("PickupToolFirstTime"))
+                {
+                    string task = "PickupToolFirstTime";
+                    completedTasks.Add(task);
+                    uncompletedTasks.Remove(task);
+                    pickedUp(task);
+                }
+
+            }
+            else if (hit.collider.GetComponent<Oscie>())
             {
                 if (!dialogUI.GetComponent<Dialogue>().isTalking)
                 {
@@ -453,6 +461,7 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (itemHolder.GetComponentInChildren<InvItem>())
         {
+            
             Ingredient tasteIng = itemHolder.GetComponentInChildren<InvItem>().ingredient;
             if (tasteIng.unrevealedFlavours.Count != 0)
             {
@@ -464,6 +473,14 @@ public class FirstPersonControls : MonoBehaviour
     }
 
 
-
+    public void holdItem()
+    {
+        if (uncompletedTasks.Contains("HoldItemFirstTime")&& !dialogUI.GetComponent<Dialogue>().isTalking){
+            string task = "HoldItemFirstTime";
+            completedTasks.Add(task);
+            uncompletedTasks.Remove(task);
+            pickedUp(task);
+        }
+    }
 
 }
