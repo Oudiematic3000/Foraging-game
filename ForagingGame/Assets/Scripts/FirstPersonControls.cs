@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
+using UnityEngine.XR;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -30,14 +31,6 @@ public class FirstPersonControls : MonoBehaviour
     private CharacterController characterController; // Reference to the CharacterController component
     private bool onSteepSlope = false;
 
-
-    [Header("SHOOTING SETTINGS")]
-    [Space(5)]
-    public GameObject projectilePrefab; // Projectile prefab for shooting
-    public Transform firePoint; // Point from which the projectile is fired
-    public float projectileSpeed = 20f; // Speed at which the projectile is fired
-   
-
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
@@ -48,7 +41,7 @@ public class FirstPersonControls : MonoBehaviour
     public float pickUpRange = 3f; // Range within which objects can be picked up
     public bool holdingOscie = false;
     public InventoryManager inventory;
-    public static event Action<GameObject> pickedUp;
+    public static event Action<string> pickedUp;
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -322,12 +315,12 @@ public class FirstPersonControls : MonoBehaviour
             {
                 ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
                 Destroy(hit.collider.gameObject);
-                pickedUp(hit.collider.gameObject);
+                
             }else if (hit.collider.GetComponent<Oscie>())
             {
                 if (!dialogUI.GetComponent<Dialogue>().isTalking)
                 {
-                    pickedUp(hit.collider.gameObject);
+                    pickedUp("PickupOscie");
                     StartCoroutine(waitForDialogue(hit));
                 }
                 
@@ -437,7 +430,12 @@ public class FirstPersonControls : MonoBehaviour
                 {
                     completedTasks.Add("OpenNotebookFirstTime");
                     uncompletedTasks.Remove("OpenNotebookFirstTime");
-                    pickedUp(inventoryUI);
+                    pickedUp("OpenNotebookFirstTime");
+                }else if(holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstIngredient") && inventory.firstIn)
+                {
+                    completedTasks.Add("OpenNotebookFirstIngredient");
+                    uncompletedTasks.Remove("OpenNotebookFirstIngredient");
+                    pickedUp("OpenNotebookFirstIngredient");
                 }
             }
         }

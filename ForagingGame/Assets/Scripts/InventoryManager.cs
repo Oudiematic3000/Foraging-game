@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public Sprite openSprite;
     public GameObject cookSprite;
     public static InventoryManager instance;
+    public bool firstIn=false;
     void Awake()
     {
         if (instance)
@@ -64,6 +65,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddInventory(Ingredient item)
     {
+        if (!firstIn) firstIn = true;
         bool isDuplicate = false;
         for (int i =0; i<slots.Length; i++)
         {

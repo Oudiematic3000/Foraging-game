@@ -7,7 +7,7 @@ public class Oscie : MonoBehaviour
 {
     public GameObject[] tools;
     public static event Action<string[]> sendDialogText;
-    public string[] osciePickupDialogue, notebookFirstTimeDialog;
+    public string[] osciePickupDialogue, notebookFirstTimeDialogue, notebookFirstIngredientDialogue;
     public string[] spokenDialogue;
     public string[] testDialog;
     private void Awake()
@@ -33,15 +33,18 @@ public class Oscie : MonoBehaviour
     {
         
     }
-    public void getDialog(GameObject g)
+    public void getDialog(string s)
     {
-        if (g.GetComponent<Oscie>())
+        if (s=="PickupOscie")
         {
             sendDialogText(osciePickupDialogue);
-        }else if (g.GetComponent<InventoryManager>())
+        }else if (s=="OpenNotebookFirstTime")
         {
             GetComponent<AudioSource>().spatialBlend = 0;
-            sendDialogText(notebookFirstTimeDialog);
+            sendDialogText(notebookFirstTimeDialogue);
+        }else if (s == "OpenNotebookFirstIngredient")
+        {
+            sendDialogText(notebookFirstIngredientDialogue);
         }
     }
     public void speak()

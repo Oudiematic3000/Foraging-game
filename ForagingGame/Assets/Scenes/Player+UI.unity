@@ -3094,7 +3094,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1074391162}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99998987
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3269,10 +3269,6 @@ MonoBehaviour:
   playerCamera: {fileID: 198867196}
   airSpeed: 8
   slopeNormal: {x: 0, y: 0, z: 0}
-  projectilePrefab: {fileID: 8314589940101250669, guid: a19637a15ac951443aa0f4440b7fe9d6,
-    type: 3}
-  firePoint: {fileID: 0}
-  projectileSpeed: 20
   holdPosition: {fileID: 951722471}
   ownedTools: 
   pickUpRange: 3
@@ -4375,7 +4371,7 @@ MonoBehaviour:
   text:
   - Oi!
   - Over here!
-  speed: 0.04
+  speed: 0.1
   audioManager: {fileID: 0}
   isTalking: 0
   waitTime: 2
@@ -6183,7 +6179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000038736216}
+  m_AnchoredPosition: {x: 0, y: 0.000022175787}
   m_SizeDelta: {x: 0, y: 856.18}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1988633501
@@ -6992,6 +6988,7 @@ MonoBehaviour:
   isOpen: 0
   openSprite: {fileID: 21300000, guid: da43a29e443434f4fb2d7a52ce404b37, type: 3}
   cookSprite: {fileID: 348456043}
+  firstIn: 0
 --- !u!114 &2081328301
 MonoBehaviour:
   m_ObjectHideFlags: 0

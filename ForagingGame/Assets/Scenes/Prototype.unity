@@ -12915,13 +12915,17 @@ MonoBehaviour:
   - Go find some ingredients for a steak and chips.
   - Open your notebook by pressing TAB
   - Whatever the fuck that means.
-  notebookFirstTimeDialog:
-  - I've given you the basic outline of a recipe for Steak and Chips.
-  - You can see it on the right there.
-  - Each element of the recipe has a basic structure comprised of certain types of
-    ingredients.
-  - With the structure as a bit of guidance,
-  - it is your job to find ingredients with the right flavours for the dish.
+  notebookFirstTimeDialogue:
+  - Ok let's see what we're workin with...
+  - 'On your left: the ingredients you''ve collected.'
+  - Nice collection so far, kid.
+  - 'On your right: The outline of a recipe.'
+  - In the recipe outline, you can see each element of the dish.
+  - You can also see what type of ingredients each element requires.
+  - This exam will test your ability to sus out exactly WHAT ingredients and flavours
+    should be in the dish.
+  notebookFirstIngredientDialogue:
+  - Cumdog
   spokenDialogue:
   - Fuckoff
   testDialog: []
@@ -12936,8 +12940,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8cbf40d987aefa84dbabe4f0a794557e, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: 0.627
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -12949,9 +12953,9 @@ AudioSource:
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
-  BypassEffects: 0
+  BypassEffects: 1
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
