@@ -55,6 +55,7 @@ public class FirstPersonControls : MonoBehaviour
     public TextMeshProUGUI toolUI;
     public GameObject inventoryUI;
     public GameObject cookbookUI;
+    public GameObject noteUI;
 
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
@@ -226,6 +227,9 @@ public class FirstPersonControls : MonoBehaviour
                 }else if (hit.collider.GetComponent<Door>())
                 {
                     interactToolText.text = "Enter";
+                }else if(hit.collider.GetComponent<Note>())
+                {
+                    interactToolText.text = "Read";
                 }
             }
             else
@@ -352,6 +356,11 @@ public class FirstPersonControls : MonoBehaviour
             {
                 hit.collider.GetComponent<Pot>().cookbookUI = GameObject.Find("Cookbook");
                 hit.collider.GetComponent<Pot>().ToggleCookbook();
+            }else if (hit.collider.GetComponent<Note>())
+            {
+                noteUI.transform.localScale= Vector3.one;
+                noteUI.GetComponentInChildren<TextMeshProUGUI>().text=hit.collider.GetComponent<Note>().text;
+
             }
            
         }
@@ -430,8 +439,12 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (cookbookUI.transform.localScale == Vector3.zero)
         {
-            
-            if (inventoryUI.transform.localScale == Vector3.one)
+           if (noteUI.transform.localScale == Vector3.one)
+            {
+                noteUI.transform.localScale = Vector3.zero;
+            }
+
+            else if (inventoryUI.transform.localScale == Vector3.one)
             {
                 inventoryUI.transform.localScale = Vector3.zero;
                 inventory.isOpen = false;
