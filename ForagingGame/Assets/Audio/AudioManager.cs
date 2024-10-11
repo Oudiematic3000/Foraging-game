@@ -27,7 +27,10 @@ public class AudioManager : MonoBehaviour
 
     }
 
-
+    void PlaySound(Sound s)
+    {
+        s.source.Play();
+    }
 
 }
 

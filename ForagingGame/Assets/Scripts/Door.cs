@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
     public int currentScene;
+    
     public void changeScene()
     {
         if (currentScene==0)
