@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     void Awake()
     {
-        
+        FirstPersonControls.sendSound += PlaySound;
 
         foreach (Sound s in sounds)
         {
@@ -23,16 +23,27 @@ public class AudioManager : MonoBehaviour
 
 
         }
-        sounds[0].source.Play();
+        getSound("BGM").source.Play();
 
     }
 
-    void PlaySound(Sound s)
+    void PlaySound(string s)
     {
-        s.source.Play();
+        getSound(s).source.PlayOneShot(getSound(s).clip);
+    }
+
+    Sound getSound(string s)
+    {
+        foreach(Sound sou in sounds)
+        {
+            if(sou.name==s)return sou;
+        }
+        return null;
     }
 
 }
+
+
 
 [System.Serializable]
 public class Sound

@@ -62,6 +62,8 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject dialogUI;
     public GameObject itemHolder;
 
+    public static event Action<string> sendSound;
+
     [Header("TUTORIAL SETTINGS")]
     [Space(5)]
     public List<string> completedTasks;
@@ -69,6 +71,7 @@ public class FirstPersonControls : MonoBehaviour
 
     public static FirstPersonControls instance;
     Controls playerInput;
+
 
     private void Awake()
     {
@@ -338,6 +341,7 @@ public class FirstPersonControls : MonoBehaviour
             {
                 if (!dialogUI.GetComponent<Dialogue>().isTalking)
                 {
+                    sendSound("Wind");
                     pickedUp("PickupOscie");
                     StartCoroutine(waitForDialogue(hit));
                 }
@@ -352,6 +356,7 @@ public class FirstPersonControls : MonoBehaviour
             }else if (hit.collider.GetComponent<Door>())
             {
                 hit.collider.GetComponent<Door>().changeScene();
+                sendSound("Door");
             }else if (hit.collider.GetComponent<Pot>())
             {
                 hit.collider.GetComponent<Pot>().cookbookUI = GameObject.Find("Cookbook");
