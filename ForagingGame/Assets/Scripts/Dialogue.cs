@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,16 +10,49 @@ public class Dialogue : MonoBehaviour
     public string[] text;
     public float speed;
     public AudioManager audioManager;
+    public static event Action typeChar;
+    public bool isTalking=false;
+    public float waitTime;
+    private float initSpeed;
+    private float initWaitTime;
+    public bool skip =false;
+    public bool finish =false;
+    public bool typing = false;
+    private void Awake()
+    {
+        Oscie.sendDialogText += setDialog;
+    }
     void Start()
     {
         textbox.text = "";
         gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
         
+            
+           if(!typing && !finish) finish = true;
+           if (typing && !finish) skip = true;
+
+        }
+        else
+        {
+            
+            finish = false;
+        }
+
+        
+    }
+
+    public void setDialog(string[] arr)
+    {
+        text= arr;
+        startDialogue();
     }
 
    public void startDialogue()
@@ -30,19 +64,41 @@ public class Dialogue : MonoBehaviour
 
     public IEnumerator typeLine()
     {
+        isTalking = true;
         for (int i = 0; i < text.Length; i++)
         {
+            int j = 0;
+            finish = false;
+            skip = false;
             transform.localScale = Vector3.one*(0.75f);
+            
+            typing = true;
             foreach (char c in text[i].ToCharArray())
             {
-                textbox.text += c;
-                yield return new WaitForSeconds(speed);
-
-                audioManager.sounds[1].source.PlayOneShot(audioManager.sounds[1].clip);
+                if (!skip)
+                {
+                    textbox.text += c;
+                    yield return new WaitForSeconds(speed);
+                    if(j%2==0) typeChar();
+                    j++;
+                }
+                else
+                {
+                    skip = false;
+                    textbox.text = text[i];
+                    
+                    break;
+                    
+                }
             }
-            yield return new WaitForSeconds(1f);
+            typing = false;
+            skip = false;
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitWhile(()=>!finish);
+           
             transform.localScale = Vector3.zero;
             textbox.text = "";
         }
+        isTalking=false;
     }
 }

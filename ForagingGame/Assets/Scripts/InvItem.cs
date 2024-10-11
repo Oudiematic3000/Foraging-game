@@ -1,37 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
-public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
+public class InvItem : MonoBehaviour, IPointerEnterHandler
 {
     public Ingredient ingredient;
-    public int quantity;
     public TextMeshProUGUI itemText;
     public int itemCount = 1;
-    public bool selected = false;
     public Image itemSprite;
-    public bool waitingSelection=false;
-    public System.Action<Ingredient> callback;
     void Start()
     {
         RefreshCount();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
-    }
-    void OnEnable()
-    {
-        CookBookManager.waitForIngredient += waitForIngredient;
-    }
-    public void waitForIngredient(System.Action<Ingredient> callback)
-    {
-        this.callback=callback;
+        if (FindAnyObjectByType<CookBookManager>().isOpen)
+        {
+            itemText.color = Color.white;
+        }
+        else
+        {
+            itemText.color = Color.black;
+        }
     }
 
     public void SetUp(Ingredient item) 
@@ -46,15 +43,7 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
         displayInfo();
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
-    {
-        CookBookManager cookbook = GameObject.Find("Cookbook").GetComponent<CookBookManager>();
-        if(callback!=null && cookbook.waiting)
-        {
-            callback.Invoke(ingredient);
-        }
-        
-    }
+   
 
 
     public void RefreshCount()
@@ -62,8 +51,13 @@ public class InvItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
         itemText.text = itemCount.ToString();
         bool textActive = itemCount > 1;
         itemText.gameObject.SetActive(textActive);
+        if (itemCount < 1) Destroy(gameObject);
     }
-
+    public void RemoveItem()
+    {
+        itemCount--;
+        RefreshCount();
+    }
     public void displayInfo()
     {
         TextMeshProUGUI descriptionPane = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();

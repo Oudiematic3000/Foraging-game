@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Sockets;
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
+using UnityEngine.XR;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -30,14 +31,6 @@ public class FirstPersonControls : MonoBehaviour
     private CharacterController characterController; // Reference to the CharacterController component
     private bool onSteepSlope = false;
 
-
-    [Header("SHOOTING SETTINGS")]
-    [Space(5)]
-    public GameObject projectilePrefab; // Projectile prefab for shooting
-    public Transform firePoint; // Point from which the projectile is fired
-    public float projectileSpeed = 20f; // Speed at which the projectile is fired
-   
-
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
@@ -46,9 +39,9 @@ public class FirstPersonControls : MonoBehaviour
     public List<Ingredient.Tool> ownedTools;
     private float scrollInput;
     public float pickUpRange = 3f; // Range within which objects can be picked up
-    private bool holdingOscie = false;
+    public bool holdingOscie = false;
     public InventoryManager inventory;
-    public Oscie oscie;
+    public static event Action<string> pickedUp;
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -66,10 +59,15 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
     public GameObject dialogUI;
+    public GameObject itemHolder;
 
+    [Header("TUTORIAL SETTINGS")]
+    [Space(5)]
+    public List<string> completedTasks;
+    public List<string> uncompletedTasks;
 
     public static FirstPersonControls instance;
-    
+    Controls playerInput;
 
     private void Awake()
     {
@@ -81,7 +79,7 @@ public class FirstPersonControls : MonoBehaviour
     private void OnEnable()
     {
         // Create a new instance of the input actions
-        var playerInput = new Controls();
+        playerInput = new Controls();
 
         // Enable the input actions
         playerInput.Player.Enable();
@@ -104,8 +102,6 @@ public class FirstPersonControls : MonoBehaviour
         //Subscribe to the pick-up input event
         playerInput.Player.ToggleInventory.performed += ctx => ToggleInventory(); // Call the PickUpObject method when pick-up input is performed
 
-        playerInput.Player.ToggleCookbook.performed += ctx => ToggleCookbook(); // Call the PickUpObject method when pick-up input is performed
-
         // Subscribe to the SwitchTool input events
         playerInput.Player.SwitchTool.performed += ctx => scrollInput = ctx.ReadValue<float>(); // Update moveInput when movement input is performed
         playerInput.Player.SwitchTool.performed += ctx => SwitchTool();
@@ -113,8 +109,11 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the crouch input event
         playerInput.Player.Crouch.performed += ctx => Crouch(); // Call the PickUpObject method when pick-up input is performed
 
+        playerInput.Player.Taste.performed += ctx => Taste();
 
     }
+
+    
 
     private void Update()
     {
@@ -316,28 +315,64 @@ public class FirstPersonControls : MonoBehaviour
             {
                 ownedTools.Add(hit.collider.GetComponent<Tool>().tool);
                 Destroy(hit.collider.gameObject);
-            }else if (hit.collider.GetComponent<Oscie>())
-            {
-                hit.collider.transform.position = holdPosition.position;
-                hit.collider.transform.rotation = holdPosition.rotation;
-                hit.collider.transform.Rotate(new Vector3(0, 180, 0));
-                hit.collider.transform.parent = holdPosition;
-                holdingOscie = true;
-                ownedTools.Add(Ingredient.Tool.None);
+                if (uncompletedTasks.Contains("PickupToolFirstTime"))
+                {
+                    string task = "PickupToolFirstTime";
+                    completedTasks.Add(task);
+                    uncompletedTasks.Remove(task);
+                    pickedUp(task);
+                }else if (uncompletedTasks.Contains("PickupToolLastTime") && completedTasks.Contains("PickupToolFirstTime"))
+                {
+                    string task = "PickupToolLastTime";
+                    completedTasks.Add(task);
+                    uncompletedTasks.Remove(task);
+                    pickedUp(task);
+                }
 
-            }else if (hit.collider.GetComponent<Obstacle>())
+            }
+            else if (hit.collider.GetComponent<Oscie>())
             {
-                if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded)Destroy(hit.collider.gameObject);
+                if (!dialogUI.GetComponent<Dialogue>().isTalking)
+                {
+                    pickedUp("PickupOscie");
+                    StartCoroutine(waitForDialogue(hit));
+                }
+                
+                
+
+            }
+            else if (hit.collider.GetComponent<Obstacle>())
+            {
+                if(heldTool==hit.collider.GetComponent<Obstacle>().toolneeded) hit.collider.GetComponent<Obstacle>().PlayDeath();
               
             }else if (hit.collider.GetComponent<Door>())
             {
                 hit.collider.GetComponent<Door>().changeScene();
             }else if (hit.collider.GetComponent<Pot>())
             {
+                hit.collider.GetComponent<Pot>().cookbookUI = GameObject.Find("Cookbook");
                 hit.collider.GetComponent<Pot>().ToggleCookbook();
             }
            
         }
+    }
+
+    IEnumerator waitForDialogue(RaycastHit hit)
+    {
+        playerInput.Player.Movement.Disable();
+        playerInput.Player.Jump.Disable();
+        while (FindAnyObjectByType<Dialogue>().isTalking)
+        {
+            yield return null;
+        }
+        playerInput.Player.Movement.Enable();
+        playerInput.Player.Jump.Enable();
+        hit.collider.transform.position = holdPosition.position;
+        hit.collider.transform.rotation = holdPosition.rotation;
+        hit.collider.transform.Rotate(new Vector3(0, 180, 0));
+        hit.collider.transform.parent = holdPosition;
+        holdingOscie = true;
+        ownedTools.Add(Ingredient.Tool.None);
     }
 
     public void SwitchTool()
@@ -357,7 +392,7 @@ public class FirstPersonControls : MonoBehaviour
             }
             
             heldTool = ownedTools[toolIndex];
-            oscie.showTool((int)heldTool);
+            holdPosition.GetChild(0).GetComponent<Oscie>().showTool((int)heldTool);
           
         }
     }
@@ -372,15 +407,8 @@ public class FirstPersonControls : MonoBehaviour
         Destroy(hit.gameObject);
     }
 
-    public void ToggleCookbook()
-    {
-        if (cookbookUI.transform.localScale == Vector3.one)
-        {
-            cookbookUI.transform.localScale = Vector3.zero;
-            inventory.isOpen = false;
-        }
-    }
-            public void Crouch()
+    
+    public void Crouch()
     {
         if (isCrouching)
         {
@@ -400,21 +428,71 @@ public class FirstPersonControls : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if(inventoryUI.transform.localScale == Vector3.one)
+        if (cookbookUI.transform.localScale == Vector3.zero)
         {
-            inventoryUI.transform.localScale = Vector3.zero;
-            inventory.isOpen=false;
+            
+            if (inventoryUI.transform.localScale == Vector3.one)
+            {
+                inventoryUI.transform.localScale = Vector3.zero;
+                inventory.isOpen = false;
+                if (itemHolder.transform.childCount > 0)
+                {
+                    Ingredient held = itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
+                    inventory.GetComponent<InventoryManager>().AddInventory(held);
+                    Destroy(itemHolder.transform.GetChild(0).gameObject);
+                }
+            }
+            else if (inventoryUI.transform.localScale == Vector3.zero)
+            {
+                inventoryUI.transform.localScale = Vector3.one;
+                inventory.isOpen = true;
+                if (holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstTime"))
+                {
+                    completedTasks.Add("OpenNotebookFirstTime");
+                    uncompletedTasks.Remove("OpenNotebookFirstTime");
+                    pickedUp("OpenNotebookFirstTime");
+                }else if(holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstIngredient") && inventory.firstIn)
+                {
+                    completedTasks.Add("OpenNotebookFirstIngredient");
+                    uncompletedTasks.Remove("OpenNotebookFirstIngredient");
+                    pickedUp("OpenNotebookFirstIngredient");
+                }
+            }
         }
-        else if(inventoryUI.transform.localScale == Vector3.zero) {
-            inventoryUI.transform.localScale = Vector3.one;
-            inventory.isOpen=true;
+        else
+        {
+            cookbookUI.transform.localScale=Vector3.zero;
+            cookbookUI.GetComponent<CookBookManager>().isOpen=false;
+            inventoryUI.transform.localScale = Vector3.zero;
+            inventory.isOpen = false;
         }
     }
 
-    
+
+    private void Taste()
+    {
+        if (itemHolder.GetComponentInChildren<InvItem>())
+        {
+            
+            Ingredient tasteIng = itemHolder.GetComponentInChildren<InvItem>().ingredient;
+            if (tasteIng.unrevealedFlavours.Count != 0)
+            {
+                tasteIng.tasteIngredient();
+                itemHolder.GetComponentInChildren<InvItem>().displayInfo();
+                itemHolder.GetComponentInChildren<InvItem>().RemoveItem();
+            }
+        }
+    }
 
 
-
-    
+    public void holdItem()
+    {
+        if (uncompletedTasks.Contains("HoldItemFirstTime")&& !dialogUI.GetComponent<Dialogue>().isTalking){
+            string task = "HoldItemFirstTime";
+            completedTasks.Add(task);
+            uncompletedTasks.Remove(task);
+            pickedUp(task);
+        }
+    }
 
 }

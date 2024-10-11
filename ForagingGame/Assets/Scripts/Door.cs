@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    
+    public int currentScene;
     public void changeScene()
     {
-        if (SceneManager.GetActiveScene().name == "Cottage")
+        if (currentScene==0)
         {
-            SceneManager.LoadScene("Prototype");
+            SceneManager.LoadSceneAsync("Prototype", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("Cottage");
         }
-        else
+        if (currentScene==1)
         {
-            SceneManager.LoadScene("Cottage");
+            SceneManager.LoadSceneAsync("Cottage", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("Prototype");
         }
     }
    
