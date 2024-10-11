@@ -16,18 +16,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject cookSprite;
     public static InventoryManager instance;
     public bool firstIn=false;
-    void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
+   
 
         void Start()
     {

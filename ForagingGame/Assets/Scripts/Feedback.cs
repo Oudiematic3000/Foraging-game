@@ -59,6 +59,10 @@ public class Feedback : MonoBehaviour
             {
                 output += "Too " + wrong + "!\n";
             }
+            if(e.wrongFlavs.Count==0 && e.missFlavs.Count == 0)
+            {
+                output += "Edible!\n";
+            }
         }
         feedbackText.text = output;
     }

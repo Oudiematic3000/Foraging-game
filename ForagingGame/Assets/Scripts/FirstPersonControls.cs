@@ -321,6 +321,12 @@ public class FirstPersonControls : MonoBehaviour
                     completedTasks.Add(task);
                     uncompletedTasks.Remove(task);
                     pickedUp(task);
+                }else if (uncompletedTasks.Contains("PickupToolLastTime") && completedTasks.Contains("PickupToolFirstTime"))
+                {
+                    string task = "PickupToolLastTime";
+                    completedTasks.Add(task);
+                    uncompletedTasks.Remove(task);
+                    pickedUp(task);
                 }
 
             }
@@ -429,6 +435,12 @@ public class FirstPersonControls : MonoBehaviour
             {
                 inventoryUI.transform.localScale = Vector3.zero;
                 inventory.isOpen = false;
+                if (itemHolder.transform.childCount > 0)
+                {
+                    Ingredient held = itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
+                    inventory.GetComponent<InventoryManager>().AddInventory(held);
+                    Destroy(itemHolder.transform.GetChild(0).gameObject);
+                }
             }
             else if (inventoryUI.transform.localScale == Vector3.zero)
             {

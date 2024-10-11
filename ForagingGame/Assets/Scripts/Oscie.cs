@@ -8,8 +8,8 @@ public class Oscie : MonoBehaviour
     public GameObject[] tools;
     public static event Action<string[]> sendDialogText;
     public string[] osciePickupDialogue, notebookFirstTimeDialogue, notebookFirstIngredientDialogue, holdItemFirstTimeDialogue, pickupToolFirstTimeDialogue;
-    public string[] spokenDialogue;
-    public string[] testDialog;
+    public string[] pickupToolLastTimeDialogue;
+    
     private void Awake()
     {
         Dialogue.typeChar += speak;
@@ -54,6 +54,9 @@ public class Oscie : MonoBehaviour
         }else if (s == "PickupToolFirstTime")
         {
             sendDialogText(pickupToolFirstTimeDialogue);
+        }else if (s == "PickupToolLastTime")
+        {
+            sendDialogText(pickupToolLastTimeDialogue);
         }
     }
     public void speak()

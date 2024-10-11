@@ -158,7 +158,8 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
             t.GetComponentInChildren<InvItem>().RemoveItem();
             //Destroy(t.gameObject);
         }
-
+        FindAnyObjectByType<Feedback>().transform.localScale=Vector3.one;
+        FindAnyObjectByType<NoteRecipe>().transform.localScale = Vector3.zero;
         cookBookManager.transform.localScale= Vector3.zero;
         cookBookManager.isOpen=false;
     }
