@@ -101,6 +101,7 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
 
     public void RemoveGuess(Ingredient ing)
     {
+        Debug.Log(ing.ingredientName);
         guessIngredients.Remove(ing);
         displayAdded();
     }
@@ -154,9 +155,9 @@ public class ElementSlot : MonoBehaviour, IPointerClickHandler
     {
         foreach(Transform t in grid.transform)
         {
-            Debug.Log(t);    
+             
             t.GetComponentInChildren<InvItem>().RemoveItem();
-            //Destroy(t.gameObject);
+           
         }
         FindAnyObjectByType<Feedback>().transform.localScale=Vector3.one;
         FindAnyObjectByType<NoteRecipe>().transform.localScale = Vector3.zero;

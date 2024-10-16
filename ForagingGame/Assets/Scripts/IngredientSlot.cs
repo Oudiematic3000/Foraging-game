@@ -24,12 +24,13 @@ public class IngredientSlot : MonoBehaviour, IPointerClickHandler
     
     private void OnTransformChildrenChanged()
     {
-        childChanged();
+        
         if (transform.childCount == 1)
         {
            if(cookBookManager.itemHolder.transform.childCount>0) slotIngChanged(cookBookManager.itemHolder.GetComponentInChildren<InvItem>().ingredient);
-            Destroy(gameObject);
+           Destroy(gameObject);
         }
+        childChanged();
     }
     public void OnPointerClick(PointerEventData eventData)
     {
