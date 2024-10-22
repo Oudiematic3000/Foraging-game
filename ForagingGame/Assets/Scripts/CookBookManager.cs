@@ -109,6 +109,7 @@ public class CookBookManager : MonoBehaviour
                 newElemScript.Setup(ing);
             }
             newElemScript.displayAdded();
+            
             i++;
         }
     }
