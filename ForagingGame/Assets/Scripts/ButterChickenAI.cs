@@ -13,6 +13,8 @@ public class ButterChickenAI : MonoBehaviour
     public GameObject player;
     public int state;
 
+    public AudioSource passiveSource, scareSource;
+
     public static event Action<string> chickenEncounter;
     // Update is called once per frame
 
@@ -37,6 +39,7 @@ public class ButterChickenAI : MonoBehaviour
         if (playerDistance <= fleeRange && playerIsMoving)
         {
             state = 1;
+            if (!scareSource.isPlaying) scareSource.Play();
             if(player.GetComponent<FirstPersonControls>().holdingOscie && player.GetComponent<FirstPersonControls>().uncompletedTasks.Contains("ChickenEncounterFirstTime"))
             {
                 player.GetComponent<FirstPersonControls>().completedTasks.Add("ChickenEncounterFirstTime");
@@ -49,6 +52,8 @@ public class ButterChickenAI : MonoBehaviour
         {
             navMeshAgent.speed = wanderSpeed;
             state = 0;
+            if(!passiveSource.isPlaying) passiveSource.Play();
+
         }
 
         switch (state)

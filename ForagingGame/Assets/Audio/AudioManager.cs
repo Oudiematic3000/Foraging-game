@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
    
-    public Sound[] sounds;
+    public Sound[] sounds, ambience;
     public static AudioManager instance;
     void Awake()
     {
@@ -24,12 +24,24 @@ public class AudioManager : MonoBehaviour
 
         }
         getSound("BGM").source.Play();
+        StartCoroutine(loopAmbience());
+    }
 
+    public IEnumerator loopAmbience()
+    {
+       
+        foreach (Sound s in ambience) {
+         s.source.PlayOneShot(s.clip);
+            yield return new WaitForSeconds(5f);
+        }
+        yield return new WaitForSeconds(18f);
+        StartCoroutine(loopAmbience());
     }
 
     void PlaySound(string s)
     {
         getSound(s).source.PlayOneShot(getSound(s).clip);
+        Debug.Log(getSound(s).clip.name);
     }
 
     Sound getSound(string s)

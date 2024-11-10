@@ -198,6 +198,7 @@ public class FirstPersonControls : MonoBehaviour
             interactUI.SetActive(true);
             if (hit.collider.CompareTag("Interactable"))
             {
+                interactToolText.text = "Interact";
                 interactObjectText.text = hit.collider.name;
                 if (hit.collider.GetComponent<PickUp>() != null && holdingOscie)
                 {
@@ -235,6 +236,9 @@ public class FirstPersonControls : MonoBehaviour
                 {
                     interactToolText.text = "Read";
                 }
+                
+                    
+                
             }
             else
             {
@@ -303,9 +307,26 @@ public class FirstPersonControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
+            if (holdingOscie)
+            {
+                if (heldTool == Ingredient.Tool.None)
+                {
+                    sendSound("Tongue");
+                }
+                else if (heldTool == Ingredient.Tool.Drill)
+                {
+                    sendSound("Drill");
+                }
+                else if (heldTool == Ingredient.Tool.Scraper)
+                {
+                    sendSound("Scrape");
+                }
+            }
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.GetComponent<PickUp>() != null)
             {
+                
+
                 Ingredient hitIngredient = hit.collider.GetComponent<PickUp>().ingredient;
 
                 if (hitIngredient.toolNeeded == heldTool && holdingOscie)
@@ -342,7 +363,7 @@ public class FirstPersonControls : MonoBehaviour
             {
                 if (!dialogUI.GetComponent<Dialogue>().isTalking)
                 {
-                    sendSound("Wind");
+                
                     pickedUp("PickupOscie");
                     StartCoroutine(waitForDialogue(hit));
                 }

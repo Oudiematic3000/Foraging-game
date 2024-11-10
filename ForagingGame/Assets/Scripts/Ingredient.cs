@@ -41,7 +41,7 @@ public class Ingredient : ScriptableObject
         Seasoning,
         Produce,
         Starch,
-        Fat,
+        Fat
         
     }
 
