@@ -8,9 +8,9 @@ public class SceneLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadSceneAsync("Cottage", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("Player+UI", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive); 
     }
 
+    
    
 }

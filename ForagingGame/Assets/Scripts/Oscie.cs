@@ -8,18 +8,21 @@ public class Oscie : MonoBehaviour
     public GameObject[] tools;
     public static event Action<string[]> sendDialogText;
     public string[] osciePickupDialogue, notebookFirstTimeDialogue, notebookFirstIngredientDialogue, holdItemFirstTimeDialogue, pickupToolFirstTimeDialogue;
-    public string[] pickupToolLastTimeDialogue;
+    public string[] pickupToolLastTimeDialogue, correctRecipeFirstTimeDialogue, chickenEncounterFirstTimeDialogue;
     
     private void Awake()
     {
         Dialogue.typeChar += speak;
         FirstPersonControls.pickedUp += getDialog;
-        
+        Feedback.allCorrect += getDialog;
+        ButterChickenAI.chickenEncounter += getDialog;
     }
     private void OnDestroy()
     {
         Dialogue.typeChar -= speak;
         FirstPersonControls.pickedUp -= getDialog;
+        Feedback.allCorrect -= getDialog;
+        ButterChickenAI.chickenEncounter -= getDialog;
     }
     void Start()
     {
@@ -57,6 +60,12 @@ public class Oscie : MonoBehaviour
         }else if (s == "PickupToolLastTime")
         {
             sendDialogText(pickupToolLastTimeDialogue);
+        }else if (s == "CookCorrectFirstTime")
+        {
+            sendDialogText(correctRecipeFirstTimeDialogue);
+        }else if(s == "ChickenEncounterFirstTime")
+        {
+            sendDialogText(chickenEncounterFirstTimeDialogue);
         }
     }
     public void speak()

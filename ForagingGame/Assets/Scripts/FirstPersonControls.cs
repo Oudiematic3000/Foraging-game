@@ -56,6 +56,7 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject cookbookUI;
     public GameObject noteUI;
+    public GameObject pauseUI;
 
     public GameObject interactUI;
     public TextMeshProUGUI interactToolText, interactObjectText;
@@ -442,47 +443,55 @@ public class FirstPersonControls : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if (cookbookUI.transform.localScale == Vector3.zero)
+        if (pauseUI.transform.localScale == Vector3.one)
         {
-           if (noteUI.transform.localScale == Vector3.one)
-            {
-                noteUI.transform.localScale = Vector3.zero;
-            }
-
-            else if (inventoryUI.transform.localScale == Vector3.one)
-            {
-                inventoryUI.transform.localScale = Vector3.zero;
-                inventory.isOpen = false;
-                if (itemHolder.transform.childCount > 0)
-                {
-                    Ingredient held = itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
-                    inventory.GetComponent<InventoryManager>().AddInventory(held);
-                    Destroy(itemHolder.transform.GetChild(0).gameObject);
-                }
-            }
-            else if (inventoryUI.transform.localScale == Vector3.zero)
-            {
-                inventoryUI.transform.localScale = Vector3.one;
-                inventory.isOpen = true;
-                if (holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstTime"))
-                {
-                    completedTasks.Add("OpenNotebookFirstTime");
-                    uncompletedTasks.Remove("OpenNotebookFirstTime");
-                    pickedUp("OpenNotebookFirstTime");
-                }else if(holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstIngredient") && inventory.firstIn)
-                {
-                    completedTasks.Add("OpenNotebookFirstIngredient");
-                    uncompletedTasks.Remove("OpenNotebookFirstIngredient");
-                    pickedUp("OpenNotebookFirstIngredient");
-                }
-            }
+            pauseUI.transform.localScale = Vector3.zero;
         }
         else
         {
-            cookbookUI.transform.localScale=Vector3.zero;
-            cookbookUI.GetComponent<CookBookManager>().isOpen=false;
-            inventoryUI.transform.localScale = Vector3.zero;
-            inventory.isOpen = false;
+            if (cookbookUI.transform.localScale == Vector3.zero)
+            {
+                if (noteUI.transform.localScale == Vector3.one)
+                {
+                    noteUI.transform.localScale = Vector3.zero;
+                }
+
+                else if (inventoryUI.transform.localScale == Vector3.one)
+                {
+                    inventoryUI.transform.localScale = Vector3.zero;
+                    inventory.isOpen = false;
+                    if (itemHolder.transform.childCount > 0)
+                    {
+                        Ingredient held = itemHolder.transform.GetChild(0).GetComponent<InvItem>().ingredient;
+                        inventory.GetComponent<InventoryManager>().AddInventory(held);
+                        Destroy(itemHolder.transform.GetChild(0).gameObject);
+                    }
+                }
+                else if (inventoryUI.transform.localScale == Vector3.zero)
+                {
+                    inventoryUI.transform.localScale = Vector3.one;
+                    inventory.isOpen = true;
+                    if (holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstTime"))
+                    {
+                        completedTasks.Add("OpenNotebookFirstTime");
+                        uncompletedTasks.Remove("OpenNotebookFirstTime");
+                        pickedUp("OpenNotebookFirstTime");
+                    }
+                    else if (holdingOscie && uncompletedTasks.Contains("OpenNotebookFirstIngredient") && inventory.firstIn)
+                    {
+                        completedTasks.Add("OpenNotebookFirstIngredient");
+                        uncompletedTasks.Remove("OpenNotebookFirstIngredient");
+                        pickedUp("OpenNotebookFirstIngredient");
+                    }
+                }
+            }
+            else
+            {
+                cookbookUI.transform.localScale = Vector3.zero;
+                cookbookUI.GetComponent<CookBookManager>().isOpen = false;
+                inventoryUI.transform.localScale = Vector3.zero;
+                inventory.isOpen = false;
+            }
         }
     }
 
