@@ -30,6 +30,7 @@ public class FirstPersonControls : MonoBehaviour
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
     private bool onSteepSlope = false;
+    public Animator animator;
 
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
@@ -127,11 +128,15 @@ public class FirstPersonControls : MonoBehaviour
         LookAround();
         ApplyGravity();
         hoverItem();
-
+        if (characterController.velocity.magnitude < 1)
+        {
+            animator.Play("Idle");
+        }
     }
 
     public void Move()
     {
+        animator.Play("Walk");
         float currentSpeed;
         if (isCrouching)
         {

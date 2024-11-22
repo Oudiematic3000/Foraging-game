@@ -25768,6 +25768,41 @@ PrefabInstance:
       propertyPath: tools.Array.data[2]
       value: 
       objectReference: {fileID: 985794729}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[10]
+      value: '"Thanks for playing our unnamed foraging game."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[11]
+      value: '"While this forest ended up being the only area in the game, "'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[12]
+      value: '" we''re happier to have fleshed it out than rushed a second stage."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[13]
+      value: '"This was a super fun project and we learnt a lot from working on it."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[14]
+      value: '"GG. Hope you enjoyed it." ~Argibald, Joss and Shorn'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185882073578702225, guid: dabee04dfdb65614db3f00f227ff7ff5,
+        type: 3}
+      propertyPath: correctRecipeFirstTimeDialogue.Array.data[15]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2458990864075570831, guid: dabee04dfdb65614db3f00f227ff7ff5,
         type: 3}
       propertyPath: m_Name
