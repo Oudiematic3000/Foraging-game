@@ -6,6 +6,7 @@ using UnityEngine;
 public class Oscie : MonoBehaviour
 {
     public GameObject[] tools;
+    public Animator animator;
     public static event Action<string[]> sendDialogText;
     public string[] osciePickupDialogue, notebookFirstTimeDialogue, notebookFirstIngredientDialogue, holdItemFirstTimeDialogue, pickupToolFirstTimeDialogue;
     public string[] pickupToolLastTimeDialogue, correctRecipeFirstTimeDialogue, chickenEncounterFirstTimeDialogue;
@@ -14,6 +15,7 @@ public class Oscie : MonoBehaviour
     {
         Dialogue.typeChar += speak;
         FirstPersonControls.pickedUp += getDialog;
+        FirstPersonControls.sendSound += playAnim;
         Feedback.allCorrect += getDialog;
         ButterChickenAI.chickenEncounter += getDialog;
     }
@@ -21,16 +23,14 @@ public class Oscie : MonoBehaviour
     {
         Dialogue.typeChar -= speak;
         FirstPersonControls.pickedUp -= getDialog;
+        FirstPersonControls.sendSound -= playAnim;
         Feedback.allCorrect -= getDialog;
         ButterChickenAI.chickenEncounter -= getDialog;
     }
     void Start()
     {
-        
-        foreach (GameObject go in tools)
-        {
-            go.SetActive(false);
-        }
+
+        showTool(0);
         if (FindAnyObjectByType<FirstPersonControls>().holdingOscie) Destroy(gameObject);
     }
 
@@ -38,6 +38,10 @@ public class Oscie : MonoBehaviour
     void Update()
     {
         
+    }
+    public void playAnim(string s)
+    {
+        animator.Play(s);
     }
     public void getDialog(string s)
     {
@@ -80,9 +84,8 @@ public class Oscie : MonoBehaviour
         {
             go.SetActive(false);
         }
-        if (i != 0)
-        {
+
             tools[i].SetActive(true);
-        }
+        
     }
 }

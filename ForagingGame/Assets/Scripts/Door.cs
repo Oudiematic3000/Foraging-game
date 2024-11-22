@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     public int currentScene;
-    
+
     public void changeScene()
     {
         if (currentScene == 0){

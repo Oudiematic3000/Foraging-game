@@ -12,6 +12,7 @@ public class ButterChickenAI : MonoBehaviour
     public Vector3 startpos;
     public GameObject player;
     public int state;
+    public Animator animator;
 
     public AudioSource passiveSource, scareSource;
 
@@ -25,6 +26,13 @@ public class ButterChickenAI : MonoBehaviour
     }
     void Update()
     {
+        if(navMeshAgent.velocity.magnitude>0.25) {
+            animator.Play("Walk");
+        }
+        else
+        {
+            animator.Play("New State");
+        }
         float playerDistance = Vector3.Distance(player.transform.position, transform.position);
         bool playerIsMoving = player.GetComponent<CharacterController>().velocity.magnitude > 0;
 
@@ -63,15 +71,21 @@ public class ButterChickenAI : MonoBehaviour
                 {
                     navMeshAgent.SetDestination(startpos + UnityEngine.Random.insideUnitSphere * wanderRange);
                 }
+                animator.speed = 0.75f;
                 break;
             case 1:
                 Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
                 navMeshAgent.speed = fleeSpeed;
                 navMeshAgent.SetDestination(transform.position + fleeDirection * fleeRange);
+                animator.speed = 1.25f;
                 break;
+                
             case 2:
                 navMeshAgent.speed = baitSpeed;
-                navMeshAgent.SetDestination(player.transform.position -Vector3.one*2); 
+                Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+                Vector3 stoppingPoint = player.transform.position - directionToPlayer * 3.5f; 
+                navMeshAgent.SetDestination(stoppingPoint);
+                animator.speed = 0.5f;
                 break;
         }
       

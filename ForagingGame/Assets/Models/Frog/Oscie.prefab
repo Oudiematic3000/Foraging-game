@@ -1,0 +1,352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3378120801187955678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 111.754
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.085
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 105.952
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9991843
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.040382132
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.629
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -376215948998169126, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cfd28de7b1f7d304caff9316297e82c9, type: 2}
+    - target: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_Name
+      value: Oscie
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107304132139017767, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2587a33ee800ec44b406fbf6f4d2a97, type: 2}
+    - target: {fileID: 8442510506162454399, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a576d136270b35b4fb8651d8232540b3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 292797982951668643}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2185882073578702225}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2434699983217174725}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 156352919103522559}
+  m_SourcePrefab: {fileID: 100100000, guid: 12bfb74b744845b478ab2508f6f85bef, type: 3}
+--- !u!1 &2458990864075570831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12bfb74b744845b478ab2508f6f85bef,
+    type: 3}
+  m_PrefabInstance: {fileID: 3378120801187955678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &292797982951668643
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458990864075570831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.21, y: 1.17, z: 4.17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2185882073578702225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458990864075570831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbae0ad507d0ec4c8e6a3695b3db864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tools:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  osciePickupDialogue:
+  - So you're her, huh?
+  - The only witch to ever flunk culinary school.
+  - I've read your file-
+  - Quite remarkable.
+  - The dean wrote a letter of recommendation about you to the school of pyromancy.
+  - 'Most examinees come to this forest for their final exam, '
+  - grab a couple ingredients,
+  - 'Throw em'' in a pot '
+  - and grab that diploma.
+  - Frankly, your credit total complicates that formality.
+  - But don't worry, tadpole!
+  - They have assigned you THE BEST,
+  - MOST RELIABLE,
+  - MOST SEXY,
+  - MOST
+  - uh most
+  - MOST CULTURED!
+  - Mentor and examiner in the whole department!
+  - Okie croaky, Let's start this exam.
+  - Go find some ingredients for a steak and chips.
+  - Open your notebook by pressing TAB
+  - Whatever the fuck that means.
+  notebookFirstTimeDialogue:
+  - Ok let's see what we're workin with...
+  - 'On your left: the ingredients you''ve collected.'
+  - Nice collection so far, tadpole.
+  - 'On your right: The outline of a recipe.'
+  - In the recipe outline, you can see each element of the dish.
+  - You can also see what type of ingredients each element requires.
+  - This exam will test your ability to sus out exactly WHAT ingredients and flavours
+    should be in the dish.
+  notebookFirstIngredientDialogue:
+  - Oh look you got something.
+  - You can hover over ingredients in your inventory for some info on them.
+  - and click on them to pick them up.
+  - (Metaphorically speaking.)
+  holdItemFirstTimeDialogue:
+  - Careful where you point that thing.
+  - While holding an Item, press E to taste it.
+  - Doing so will consume the ingredient, but will reveal one of its flavours.
+  - You could try find spare ingredients to taste,
+  - Or you could just throw shit in the pot and figure the rest out later.
+  pickupToolFirstTimeDialogue:
+  - Mm. Delicious.
+  - You can learn a lot about a tool by its mouthfeel.
+  - Observe-
+  - or use scrollwheel to change tools if that makes more sense.
+  pickupToolLastTimeDialogue:
+  - Nice, another tool.
+  - Now you should be able to gather all the ingredients you need.
+  - When you've found everything you want, go back to the cottage and get cooking.
+  correctRecipeFirstTimeDialogue:
+  - Well, well, well...
+  - Looks like someone vaguely knows how to make an adequate Steak and Chips
+  - BUT
+  - That's just the chip of the iceburger
+  - You're gonna need a couple more dishes to pass this course.
+  - AND INTERESTING ONES TOO!
+  - I'm talking creative, innovative, magical shit.
+  - We're gonna need better ingredients.
+  - More than the staples you can find in this cozy forest.
+  - 'Before that though, I have a memorandum from the committee:'
+  - '"Thanks for playing the tutorial of our game. Spooky Forest DLC dropping on
+    22 November."'
+  - Huh.
+  - Well that's lame.
+  - You got games on your phone?
+  chickenEncounterFirstTimeDialogue:
+  - Those are some slippery clucks.
+  - They seem to be scared by YOUR MOVEMENT.
+--- !u!82 &2434699983217174725
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458990864075570831}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 519c9b98c863814408d2a464e5127eac, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.511
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 27
+  DopplerLevel: 1.09
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 1
+  BypassListenerEffects: 0
+  BypassReverbZones: 1
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.923
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &156352919103522559
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458990864075570831}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d495c92c79898c4f8940d9aa4735cf0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
